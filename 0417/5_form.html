@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form name="input" enctype="multipart/form-data">
+      사용자 아이디 :
+      <input type="text" name="user" placeholder="ID" /><br />
+      이메일 : <input type="email" required /> <br />
+      전화번호 :
+      <input
+        type="tel"
+        pattern="[0-9]{3}-[0-9]{3,4}-[0-9]{4}"
+        title="010-1234-1234"
+        required
+      /><br />
+      <input type="reset" value="초기화" />
+      <!-- <input>은 모두 <form>태그 안에 쓰기 -->
+      <br /><br />
+      <input type="file" accept="image/jpeg,image/gif" />
+      <!-- 파일전송을 입력할때 multipart/form-data 형식으로 보내야 백엔드가 인식함 -->
+      <!-- image/* 모든 이미지를 표시함 *는 "전체"를 뜻함 -->
+      <!-- 다른 한글 파일 등을 불러올때는 확장자를 입력함 [accept=".hwp"] -->
+      <input type="hidden" value="hiddenValue" />
+      <input type="submit" value="제출" />
+    </form>
+    <button onclick="alert('안녕하세요?')">눌러보세요!</button
+    ><br /><br />고객의 의견<br />
+    <textarea name="feedback" rows="2" cols="30"></textarea>
+  </body>
+</html>

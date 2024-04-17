@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form action="proc_form.jsp">
+      <label for="male">남성</label>
+      <input type="radio" name="gender" id="male" /><br />
+      <label for="female">여성</label>
+      <input type="radio" name="gender" id="female" /><br />
+      <input type="submit" value="제출" />
+      <br /><br /><br />
+      <label for="samsung">삼성노트북</label>
+      <input type="checkbox" id="samsung" name="notebook" />
+      <label for="LG">LG노트북</label>
+      <input type="checkbox" id="LG" name="notebook" />
+      <label for="MAC">맥북</label>
+      <input type="checkbox" id="MAC" name="notebook" />
+      <label for="ASUS">ASUS노트북</label>
+      <input type="checkbox" id="ASUS" name="notebook" />
+      <br />
+      <input type="submit" value="제출" />
+    </form>
+    <!-- radio 속성 쓴 후 name 속성을 똑같이 쓰면 같이 하나만 선택 가능 -->
+    <!-- <label>의 속성 for를 사용하면 <label>과 <input>의 id 속성을 통해 서로 연결가능(동그라미 안에 말고 단어 눌러도 선택됨) -->
+  </body>
+</html>
