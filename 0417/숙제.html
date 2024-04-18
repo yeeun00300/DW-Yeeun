@@ -15,6 +15,7 @@
           <button onclick="">중복확인</button></strong
         >
         <br />
+        <!-- br 대신 div 쓰게 되면 블록요소이기때문에 다음에 오는 내용은 자연스럽게 다음행으로 이어짐 -->
         <strong
           >비밀번호<input
             type="password"
@@ -35,13 +36,15 @@
       </fieldset>
       <fieldset>
         <legend>추가 정보</legend>
-        프로필 사진 <input type="file" accept="image/jpeg,image/gif" />
+        프로필 사진 <input type="file" accept="image/*" />
+        <!-- image/* [*하면 모든 확장자 종류 다 가능] -->
         <br /><br />
         성별 :
         <input type="radio" name="gender" id="male" />
         <label for="male">남자</label>
         <input type="radio" name="gender" id="female" />
         <label for="female">여자</label>
+        <!-- <input id>과<label for>은 연결해주는 것, type radio 한가지만 체크하고 싶으면 name 속성으로 묶어주기 -->
         <br /><br />
         생년월일 : <input type="date" /> <br /><br />
         취미
@@ -66,9 +69,9 @@
         <textarea name="feedback" rows="10" cols="100"></textarea>
       </fieldset>
       <br />
-      <button onclick="alert('회원가입이 완료되었습니다.)">회원가입</button>
-      <button onclick="alert('다시 입력하시겠습니까?')">다시입력</button>
-      <button onclick="alert('이전으로 돌아가시겠습니까?')">이전으로</button>
+      <input type="submit" value="회원가입" />
+      <input type="reset" value="다시입력" />
+      <input type="button" value="이전으로" />
     </form>
   </body>
 </html>
