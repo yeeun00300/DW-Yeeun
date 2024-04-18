@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    a:link {
+      color: white;
+      background-color: red;
+      /* text-decoration: none; */
+    }
+    a:visited {
+      color: green;
+      background-color: silver;
+      text-decoration: none;
+    }
+    a:hover {
+      color: red;
+      background-origin: yellow;
+    }
+    a:active {
+      color: wheat;
+      background-color: aqua;
+    }
+  </style>
+  <body>
+    <!-- 
+        의사선택자: 가상선택자 라고도 하며, HTML요소를 직접 선택하지 않고,
+        요소의 상태에 따라 선택하여 스타일을 적용할 때 사용한다.
+     -->
+    <!-- 
+      1. a:link - 방문 전 링크 상태
+      2. a:visited - 방문 후 링크 상태
+      3. a:hover - 마우스 오버(링크에 커서를 올렸을 때)했을 때 링크 상태
+      4. a:active - 클릭했을 때 링크 상태
+      [스타일 적용 순서는 위 번호 순서대로 하는게 좋음]
+      -->
+    <a href="https://www.netflix.com" title="넷플릭스 페이지로 이동합니다."
+      >눈물의 여왕 보러가기</a
+    >
+  </body>
+</html>
