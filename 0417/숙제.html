@@ -66,12 +66,13 @@
         <br /><br />
         자기소개
         <br />
-        <textarea name="feedback" rows="10" cols="100"></textarea>
+        <textarea rows="10" cols="100"></textarea>
       </fieldset>
       <br />
       <input type="submit" value="회원가입" />
       <input type="reset" value="다시입력" />
-      <input type="button" value="이전으로" />
+      <input type="button" value="이전으로" onclick="history.go(-1);" />
+      <!-- 이전으로 돌아가기 속성 onclick="history.go(-1);" -->
     </form>
   </body>
 </html>
