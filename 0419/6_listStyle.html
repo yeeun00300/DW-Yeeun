@@ -9,15 +9,39 @@
     ul {
       border-top: 1px solid red;
       border-bottom: 1px solid red;
-      /* padding: 10px 10px; */
-      list-style-type: none;
+      padding: 0 0;
+      /* list-style-type: none; */
+      /* list-style-image: url(../resources/img/8666681_edit_icon.png); */
+      text-align: center;
+    }
+    ul li {
+      display: inline;
+      text-transform: uppercase;
+      padding: 0 10px;
+      letter-spacing: 10px;
+    }
+    ul li a {
+      text-decoration: none;
+      color: black;
+    }
+    a:hover {
+      text-decoration: underline violet;
     }
   </style>
   <body>
-    <ul>
-      <li>아메리카노</li>
+    <!-- <ul>
+      <li>
+        <img src="../resources/img/check.png" width="16px" height="16px" />
+        아메리카노
+      </li>
       <li>아이스티</li>
       <li>자몽허니블랙티</li>
+    </ul> -->
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Blog</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Contact</a></li>
     </ul>
   </body>
 </html>
