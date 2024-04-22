@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    img.a {
+      float: left;
+    }
+    /* div {
+      height: 120px;
+      display: inline-block;
+    } */
+    /* div태그의 높이를 조정해도 이미지요소의 크기에 의해서 쓰여지기 때문에 높이가 아래로 늘어남 */
+    div {
+      border: 1px solid black;
+      width: 100px;
+      height: 100px;
+    }
+    .left {
+      float: left;
+    }
+    .right {
+      float: right;
+    }
+    .one {
+      background-color: red;
+    }
+    .two {
+      background-color: orange;
+      /* clear: both; */
+    }
+    .three {
+      background-color: yellow;
+    }
+    .four {
+      background-color: green;
+    }
+    /* float를 쓰면 브라우저가 높이를 잘 측정하지못함 */
+    /* left는 왼쪽부터 정렬 right는 오른쪽부터 정렬 */
+  </style>
+  <body>
+    <!-- <img class="a" src="../resources/img/커비.webp" width="160" height="120" />
+    <p>생활이 그대를 속일지라도 슬퍼하거나 노여워 말라....</p> -->
+    <div class="one left">박스 #1</div>
+    <div class="two left">박스 #2</div>
+    <div class="three left">박스 #3</div>
+    <div class="four left">박스 #4</div>
+    <div class="one right">박스 #1</div>
+    <div class="two right">박스 #2</div>
+    <div class="three right">박스 #3</div>
+    <div class="four right">박스 #4</div>
+  </body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    div {
+      width: 200px;
+      height: 200px;
+    }
+    #box1 {
+      background: red;
+      position: absolute;
+      /* z-index 값을 부여하기 위해서는 포지션이 먼저 되어있어야 함 [static 포지션에는 적용불가] */
+      z-index: 1;
+    }
+    #box2 {
+      background: orange;
+      position: absolute;
+      top: 100px;
+      left: 100px;
+    }
+    #box3 {
+      background: yellow;
+      position: absolute;
+      top: 200px;
+      left: 200px;
+      z-index: -1;
+    }
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      /* z-index값을 주지 않더라도 문서의 흐름상으로 absolute의 요소가 가장 먼저 보임  */
+      z-index: -1;
+      opacity: 0.5;
+      /* 
+       opacity: 사진의 불투명도  
+       0 ~ 1 사이의 값을 조정하여 요소의 불투명도를 선택한다.
+       0 : 투명
+       1 :불투명
+      */
+    }
+  </style>
+  <body>
+    <!-- <div id="box1">box #1</div>
+    <div id="box2">box #2</div>
+    <div id="box3">box #3</div> -->
+    <img src="../resources/img/커비.webp" width="200" height="200" />
+    <p>img 요소의 z-index가 -1이므로 다른 요소의 뒤에 위치한다.</p>
+  </body>
+</html>

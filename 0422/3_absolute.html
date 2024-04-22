@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    #one {
+      background-color: aquamarine;
+      width: 800px;
+      height: 400px;
+      position: absolute;
+      left: 100px;
+      top: 100px;
+    }
+    #two {
+      background-color: yellow;
+      width: 100px;
+      height: 100px;
+      position: absolute;
+      /* left: 50px;
+      top: 50px; */
+      /*
+       absolute 속성은 가장 가까운 조상 요소의 position에 대해 상대적으로 움직임
+       없을 경우에 body를 기준으로 움직임
+      */
+    }
+    #three {
+      background-color: midnightblue;
+      width: 300px;
+      height: 100px;
+      position: absolute;
+      left: 200px;
+      top: 200px;
+    }
+  </style>
+  <body>
+    <div id="one">
+      <div id="two">block#2<br />position: absolute</div>
+    </div>
+    <div id="three"></div>
+  </body>
+</html>
