@@ -7,27 +7,28 @@
   </head>
   <style>
     ul {
-      border: 3px solid red;
-      border-radius: 1%;
-      height: 800px;
-      list-style-type: none;
       display: flex;
+      border: 5px solid red;
+      border-radius: 10px;
+      height: 700px;
+      list-style-type: none;
       flex-direction: row;
-      justify-content: stretch;
-      /* justify-content: space-between; */
-      /* justify-content: space-around; */
+      justify-content: space-around;
       align-items: center;
       padding: 0;
     }
     li {
       text-align: center;
-      width: 800px;
-      height: 50px;
-      border: 2px solid black;
-      border-radius: 5%;
+      /* width: 800px; */
+      /* height: 50px; */
+      /* 가로 세로 길이로 정해주게 되면 빈공간이 생길수도 있어서 flex-grow 로 설정 */
+      flex-grow: 1;
+      border: 3px solid black;
+      border-radius: 5px;
+      padding: 20px;
       background-color: aqua;
     }
-    #one {
+    #one /*ul:nth-child(1,2,3)도 가능*/ {
       align-self: flex-start;
     }
     #two {

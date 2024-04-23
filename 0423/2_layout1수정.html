@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+    }
+    body {
+      display: flex;
+      margin: 0;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    h1 {
+      flex-grow: 1;
+    }
+    #wrapper {
+      border: 3px solid #e64980;
+      flex-grow: 4;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      width: 100%;
+      justify-content: space-between;
+      /* flex-wrap: wrap; */
+      gap: 10px;
+      padding: 10px;
+    }
+    #header {
+      background-color: #f06595;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex-grow: 2;
+    }
+    #main {
+      display: flex;
+      flex-grow: 6;
+      gap: 10px;
+    }
+    #Links {
+      background-color: #f783ac;
+      border-radius: 10px;
+      flex-grow: 1;
+      padding: 2%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 2em;
+    }
+    #text {
+      background-color: #faa2c1;
+      border-radius: 10px;
+      flex-grow: 4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-evenly;
+      font-size: 20px;
+    }
+    #Links > h2,
+    ul {
+      align-self: flex-start;
+    }
+    .content {
+      background-color: #ffa8a8;
+      border-radius: 28px;
+      border-color: #fa5252;
+      border-style: dotted;
+      width: 95%;
+      height: 40%;
+    }
+    #footer {
+      background-color: #ffdeeb;
+      border-radius: 30px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    a.w3s:link {
+      color: white;
+      text-decoration: none;
+    }
+  </style>
+  <body>
+    <h1>Layout</h1>
+    <div id="wrapper">
+      <div id="header">
+        <h2>My Blog Page</h2>
+        <p>시멘틱 태그로 만들어진 페이지 입니다.</p>
+      </div>
+      <div id="main">
+        <div id="Links">
+          <h2>Links</h2>
+          <ul>
+            <li><a href="" class="w3s">w3schools</a></li>
+            <li><a href="" class="naver">Naver</a></li>
+            <li><a href="" class="daum">Daum</a></li>
+          </ul>
+          <img
+            src="../resources/img/커비.webp"
+            width="100px"
+            height="100px"
+          /><br />커비
+        </div>
+        <div id="text">
+          <div class="content">
+            <h3>Semantic Tags</h3>
+            <p>
+              시멘틱 요소(Semantic elements)들은 브라우저에게 요소의 의미나
+              목적을 명확하게 알려주는 요소이다. 레이아웃을 만들때 쓰는 것.
+              의미가 있는 요소라면 div보다는 시멘틱 태그를 사용해준다.
+            </p>
+          </div>
+          <div class="content">
+            <h3>div와 span</h3>
+            <p>
+              div은 "divide"의 약자로서 페이지를 논리적인 섹션으로 분리하는데
+              사용되는 태그이다. span요소는 인라인 요소로서 텍스트를 위한
+              컨테이너로 사용할 수 있다.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div id="footer"><p>Copyright (c)2019 Hong</p></div>
+    </div>
+  </body>
+</html>
