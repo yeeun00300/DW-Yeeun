@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    html,
+    body,
+    #wrapper {
+      width: 100%;
+      height: 100%;
+    }
+    body {
+      margin: 0%;
+    }
+    ul {
+      padding: 0;
+      list-style-type: none;
+    }
+    a {
+      text-decoration: none;
+      color: white;
+      font-weight: 600;
+    }
+    #wrapper {
+      border: 2px solid orange;
+      display: flex;
+      flex-direction: column;
+      gap: 1%;
+    }
+    #header {
+      background-color: mediumaquamarine;
+      height: 10%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    #nav {
+      background-color: green;
+      height: 10%;
+      margin: 0;
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+    }
+    #nav > div > a {
+      letter-spacing: 0.3em;
+      font-size: 1.5em;
+    }
+    #main {
+      height: 70%;
+      display: flex;
+      gap: 0.6%;
+    }
+    .aside {
+      background-color: cornflowerblue;
+      width: 15%;
+      padding: 2% 1%;
+    }
+    .aside li {
+      background-color: cadetblue;
+      padding: 8% 8%;
+      border-bottom: 1px solid #d1a3a3;
+    }
+    .aside li:last-child {
+      border-bottom: 1px solid #e6b3b3;
+    }
+    #content {
+      background-color: #fafafa;
+      width: 70%;
+      display: flex;
+      padding: 1%;
+      gap: 1%;
+    }
+    #content a {
+      color: black;
+    }
+    #content a:hover {
+      text-decoration: underline;
+    }
+    .item {
+      width: 33%;
+      border: 1px solid #e5e5e5;
+      display: flex;
+      flex-direction: column;
+    }
+    .image-section {
+      height: 70%;
+    }
+    .desc-section {
+      height: 25%;
+    }
+    .btn-section {
+      height: 5%;
+    }
+    .btn-section button {
+      width: 100%;
+      height: 100%;
+    }
+    #footer {
+      background-color: yellow;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      justify-content: space-around;
+    }
+  </style>
+  <body>
+    <div id="wrapper">
+      <div id="header">
+        <img src="../resources/img/커비.webp" width="70PX" height="70PX" />
+        <h1>KIRBY SHOPPING</h1>
+      </div>
+      <div id="nav">
+        <div class="menu1"><a href="#">HOME</a></div>
+        <div class="menu1"><a href="#">SHOPPING ABOUT</a></div>
+        <div class="menu1"><a href="#">NEWS</a></div>
+        <div class="menu1"><a href="#">MY ACCOUNT</a></div>
+        <div class="menu1"><a href="#">CONTACTS</a></div>
+      </div>
+      <div id="main">
+        <div class="aside">
+          <div>
+            <h3>카테고리</h3>
+            <ul>
+              <li><a href="#">컴퓨터</a></li>
+              <li><a href="#">의류</a></li>
+              <li><a href="#">음악</a></li>
+              <li><a href="#">영화</a></li>
+              <li><a href="#">스포츠/레저</a></li>
+              <li><a href="#">가구/인테리어</a></li>
+              <li><a href="#">식품</a></li>
+            </ul>
+          </div>
+        </div>
+        <div id="content">
+          <div class="item">
+            <div
+              class="image-section"
+              style="
+                background-image: url(../resources/img/한성컴퓨터.png);
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: center;
+              "
+            ></div>
+            <div class="desc-section">
+              <a href="#">
+                한성컴퓨터 TFG AX8726 데스트탑 i7
+                8700/RTX2060(로스트아크,포트나이트,배틀그라운드,배그,오버워치,롤,피파,방송용,PC방,조립,가정용,사무용,가성비,본체)
+              </a>
+            </div>
+            <div class="btn-section">
+              <button>쇼핑카트에 추가하기</button>
+            </div>
+          </div>
+          <div class="item">
+            <div
+              class="image-section"
+              style="
+                background-image: url(../resources/img/엘지\ 노트북.jpg);
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: center;
+              "
+            ></div>
+            <div class="desc-section">
+              <a href="#">
+                LG그램 i7
+                8700/RTX2060(로스트아크,포트나이트,배틀그라운드,배그,오버워치,롤,피파,방송용,PC방,조립,가정용,사무용,가성비,본체)
+              </a>
+            </div>
+            <div class="btn-section">
+              <button>쇼핑카트에 추가하기</button>
+            </div>
+          </div>
+          <div class="item">
+            <div
+              class="image-section"
+              style="
+                background-image: url(../resources/img/아이맥.jpg);
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: center;
+              "
+            ></div>
+            <div class="desc-section">
+              <a href="#"
+                >CTO주문가능/애플정품/아이맥/MNE92KH/A[신한/KB국민100만원 이상
+                11Pay 결제시 최대 22개월 무이자][신한/KB국민/NH농협/삼성 20만원
+                이상 11Pay 결제 시 최대 12개월 무이자]</a
+              >
+            </div>
+            <div class="btn-section">
+              <button>쇼핑카트에 추가하기</button>
+            </div>
+          </div>
+        </div>
+        <div class="aside">
+          <h3>Shopping Cart</h3>
+          <p>현재 쇼핑카트에 물품이 없습니다.</p>
+          <a href="">쇼핑카트 보기</a>
+          <form>
+            <h3>Log In</h3>
+            <span>아이디</span>
+            <p><input type="text" /></p>
+            <span>패스워드</span>
+            <p><input type="password" /></p>
+            <input type="submit" value="로그인" />
+            <input type="reset" />
+          </form>
+          <a href="">회원가입</a>
+          <a href="">비밀번호 분실</a>
+        </div>
+      </div>
+      <div id="footer">2424 . 04 . 23 커비쇼핑 042-123-4567</div>
+    </div>
+  </body>
+</html>
