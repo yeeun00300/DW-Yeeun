@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+    }
+    body {
+      margin: 0;
+    }
+    #wrapper {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      display: grid;
+      grid-template-columns: 1fr 3fr;
+      grid-template-rows: 1fr 6fr 1fr;
+      grid-template-areas:
+        "header header"
+        "aside main"
+        "footer footer";
+      gap: 10px;
+    }
+    #header {
+      background-color: yellow;
+      grid-area: header;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    #aside {
+      background-color: pink;
+      grid-area: aside;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    #main {
+      background-color: beige;
+      grid-area: main;
+      display: grid;
+      grid-template-rows: 1fr 1fr;
+      gap: 50px;
+      align-content: center;
+      padding: 30px;
+    }
+    #footer {
+      background-color: brown;
+      grid-area: footer;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .text{
+      background-color: aqua;
+      border-style: dotted;
+      border-radius: 30px;
+    }
+  </style>
+  <body>
+    <div id="wrapper">
+      <div id="header">
+        <h1>My blog Page</h1>
+        <p>Grid로 만들어진 페이지 입니다.</p>
+      </div>
+      <div id="aside">
+        <ul>
+          <h1>Links</h1>
+          <li><a href="#">w3schools</a></li>
+          <li><a href="#">Naver</a></li>
+          <li><a href="#">Daum</a></li>
+          <img src="../resources/img/커비.webp" width="100px" height="100px">
+        </ul>
+      </div>
+      <div id="main">
+        <div class="text">
+          <h3>Semantic Tags</h3>
+          <p>시멘틱 요소(Semantic elements)들은 브라우저에게 요소의 의미나 목적을 명확하게 알려주는 요소이다. 
+            레이아웃을 만들때 쓰는것. 의미가 있는 요소라면 div보다 시멘틱 태그를 사용한다. </p>
+        </div>
+        <div class="text">
+          <h3>div와 span</h3>
+          <p>div는 "divide"의 약자로서 페이지를 논리적인 섹션으로 분리하는데 사용되는 태그이다. 
+            span 요소는 인라인 요소로서 텍스트를 위한 컨테이너로 사용될 수 있다. </p>
+        </div>
+      </div>
+      <div id="footer">Copyright (c) 2024 Yeeun</div>
+    </div?>
+  </body>
+</html>
