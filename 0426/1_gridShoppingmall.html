@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+    }
+    html,
+    body,
+    #wrapper {
+      width: 100%;
+      height: 100%;
+    }
+    #wrapper {
+      display: grid;
+      grid-template-rows: 1fr 1fr 8fr 1fr;
+      gap: 10px;
+      background-color: #ffdeeb;
+    }
+    #header {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      background-color: #f783ac;
+      border-radius: 30px;
+    }
+    #nav {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      justify-content: space-evenly;
+      background-color: #faa2c1;
+      border-radius: 30px;
+    }
+    #main {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr 1.5fr 1.5fr 1fr;
+      gap: 10px;
+    }
+    ul {
+      /* grid 로 만들때는 ul태그애 display grid 써주기 */
+      list-style: none;
+      padding: 0%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      align-items: stretch;
+    }
+    li {
+      background-color: #f7c2d7;
+      padding: 8% 8%;
+      border-bottom: 2px solid #ffdeeb;
+    }
+    a {
+      text-decoration: none;
+      color: #ee4982;
+      font-weight: 600;
+    }
+    .item {
+      width: 100%;
+      height: 100%;
+      background-color: #facfde;
+      border: 3px solid #faa2c1;
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      padding: 10px;
+    }
+    .image-section {
+      width: 100%;
+      height: 50%;
+      display: flex;
+    }
+    .desc-section {
+      height: 45%;
+    }
+    .btn-section {
+      height: 5%;
+      justify-content: flex-end;
+    }
+    .btn-section button {
+      width: 100%;
+      height: 100%;
+    }
+    #footer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #faa2c1;
+      border-radius: 30px;
+    }
+    button {
+      background-color: #faa2c1;
+      border: 2px solid #f783ac;
+      color: #ee4982;
+    }
+    input[type="submit"] {
+      background-color: #faa2c1;
+      border: 2px solid #f783ac;
+      color: #ee4982;
+    }
+    input[type="reset"] {
+      background-color: #faa2c1;
+      border: 2px solid #f783ac;
+      color: #ee4982;
+    }
+  </style>
+  <body>
+    <div id="wrapper">
+      <div id="header">
+        <img src="../resources/img/커비.webp" width="70PX" height="70PX" />
+        <h1>KIRBY SHOPPING</h1>
+      </div>
+      <div id="nav">
+        <div class="menu1"><a href="#">HOME</a></div>
+        <div class="menu1"><a href="#">SHOPPING ABOUT</a></div>
+        <div class="menu1"><a href="#">NEWS</a></div>
+        <div class="menu1"><a href="#">MY ACCOUNT</a></div>
+        <div class="menu1"><a href="#">CONTACTS</a></div>
+      </div>
+      <div id="main">
+        <div class="item">
+          <h3>카테고리</h3>
+          <ul>
+            <li><a href="#">컴퓨터</a></li>
+            <li><a href="#">의류</a></li>
+            <li><a href="#">음악</a></li>
+            <li><a href="#">영화</a></li>
+            <li><a href="#">스포츠/레저</a></li>
+            <li><a href="#">가구/인테리어</a></li>
+            <li><a href="#">식품</a></li>
+          </ul>
+        </div>
+        <div class="item">
+          <div
+            class="image-section"
+            style="
+              background-image: url(../resources/img/한성컴퓨터.png);
+              background-size: contain;
+              background-repeat: no-repeat;
+              background-position: center;
+            "
+          ></div>
+          <div class="desc-section">
+            <a href="#">
+              한성컴퓨터 TFG AX8726 데스트탑 i7
+              8700/RTX2060(로스트아크,포트나이트,배틀그라운드,배그,오버워치,롤,피파,방송용,PC방,조립,가정용,사무용,가성비,본체)
+            </a>
+          </div>
+          <div class="btn-section">
+            <button>쇼핑카트에 추가하기</button>
+          </div>
+        </div>
+        <div class="item">
+          <div
+            class="image-section"
+            style="
+              background-image: url(../resources/img/엘지\ 노트북.jpg);
+              background-size: contain;
+              background-repeat: no-repeat;
+              background-position: center;
+            "
+          ></div>
+          <div class="desc-section">
+            <a href="#">
+              LG그램 i7
+              8700/RTX2060(로스트아크,포트나이트,배틀그라운드,배그,오버워치,롤,피파,방송용,PC방,조립,가정용,사무용,가성비,본체)
+            </a>
+          </div>
+          <div class="btn-section">
+            <button>쇼핑카트에 추가하기</button>
+          </div>
+        </div>
+        <div class="item">
+          <div
+            class="image-section"
+            style="
+              background-image: url(../resources/img/아이맥.jpg);
+              background-size: contain;
+              background-repeat: no-repeat;
+              background-position: center;
+            "
+          ></div>
+          <div class="desc-section">
+            <a href="#"
+              >CTO주문가능/애플정품/아이맥/MNE92KH/A[신한/KB국민100만원 이상
+              11Pay 결제시 최대 22개월 무이자][신한/KB국민/NH농협/삼성 20만원
+              이상 11Pay 결제 시 최대 12개월 무이자]</a
+            >
+          </div>
+          <div class="btn-section">
+            <button>쇼핑카트에 추가하기</button>
+          </div>
+        </div>
+        <div class="item">
+          <h3>Shopping Cart</h3>
+          <p>현재 쇼핑카트에 물품이 없습니다.</p>
+          <a href="">쇼핑카트 보기</a>
+          <form>
+            <h3>Log In</h3>
+            <span>아이디</span>
+            <p><input type="text" /></p>
+            <span>패스워드</span>
+            <p><input type="password" /></p>
+            <input type="submit" value="로그인" />
+            <input type="reset" />
+          </form>
+          <br />
+          <a href="find">회원가입</a><a href="find">비밀번호 분실</a>
+        </div>
+      </div>
+      <div id="footer">2424 . 04 . 26 커비쇼핑 042-123-4567</div>
+    </div>
+  </body>
+</html>

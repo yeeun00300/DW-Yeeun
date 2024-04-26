@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+    }
+    html,
+    body,
+    #wrapper {
+      width: 100%;
+      height: 100%;
+    }
+    #wrapper {
+      display: grid;
+      grid-template-rows: 1fr 1fr 4fr 1fr;
+      grid-template-rows: repeat(
+        1,
+        1fr minmax(65px, auto) 6fr minmax(65px, auto)
+      );
+      gap: 1%;
+    }
+    #header {
+      background-color: #ffd65c;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2%;
+    }
+    #header div {
+      width: 5%;
+      height: 100%;
+    }
+    #header span {
+      font-size: 2rem;
+      font-weight: 800;
+      color: rgb(90, 6, 168);
+    }
+    #nav {
+      background-color: #d1b3e0;
+      padding: 0;
+      margin: 0;
+      list-style-type: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(10%, auto));
+      align-items: center;
+      justify-items: center;
+      /* justify-content는 움직일 여백이 있을때 쓸 수 있음 */
+      justify-content: space-evenly;
+    }
+    li {
+      color: white;
+      font-weight: 600;
+    }
+    li a {
+      color: inherit;
+      text-decoration: none;
+    }
+    #main {
+      display: grid;
+      grid-template-columns: 1fr 4fr 1fr;
+      /* grid-template-rows: 1fr; */
+      gap: 1%;
+    }
+    .aside {
+      background-color: #faebeb;
+      padding: 5%;
+    }
+    #category {
+      background-color: #e6b3b3;
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+    }
+    /* cursor->마우스 선택 범위 늘리기 */
+    #category li {
+      padding: 5%;
+      border-bottom: 1px solid #d1a3a3;
+      cursor: pointer;
+    }
+    /* 마우스 올렸을때 색 바꾸는 방법 */
+    #category li:hover {
+      background-color: #a17f7f;
+    }
+    #category li:nth-child(1) {
+      border-top: 1px solid #d1a3a3;
+    }
+    #content {
+      background-color: #fafafa;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(100px, auto));
+      padding: 0.1%;
+      gap: 1%;
+    }
+    .item {
+      border: 1px solid #e5e5e5;
+      padding: 5%;
+      display: grid;
+      grid-template-rows: 5fr 4fr 1fr;
+      gap: 1%;
+    }
+    .item a {
+      color: black;
+      text-decoration: none;
+    }
+    .item a:hover {
+      text-decoration: underline;
+    }
+    .item-desc {
+      align-self: center;
+    }
+    .item button {
+      width: 100%;
+      height: 70%;
+    }
+    #footer {
+      background-color: #ccccf2;
+    }
+  </style>
+  <body>
+    <div id="wrapper">
+      <div id="header">
+        <div
+          style="
+            background-image: url(../resources/img/커비.webp);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+          "
+        ></div>
+        <span>KIRBY 쇼핑</span>
+      </div>
+      <ul id="nav">
+        <li><a href="#">HOME</a></li>
+        <li><a href="#">SHOPPING ABOUT</a></li>
+        <li><a href="#">NEWS</a></li>
+        <li><a href="#">MY ACCOUNT</a></li>
+        <li><a href="#">CONTACTS</a></li>
+      </ul>
+      <div id="main">
+        <div id="aside1" class="aside">
+          <h3>카테고리</h3>
+          <ul id="category">
+            <li><a href="#">데스크탑</a></li>
+            <li><a href="#">노트북</a></li>
+            <li><a href="#">모니터</a></li>
+            <li><a href="#">마우스</a></li>
+            <li><a href="#">키보드</a></li>
+            <li><a href="#">스피커</a></li>
+            <li><a href="#">책상</a></li>
+          </ul>
+        </div>
+        <div id="content">
+          <div class="item">
+            <div
+              style="
+                background-image: url(../resources/img/한성컴퓨터.png);
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: center;
+              "
+            ></div>
+            <div class="item-desc">
+              <a href="#"
+                >한성컴퓨터 TFG AX8726 데스트탑 i7
+                8700/RTX2060(로스트아크,포트나이트,배틀그라운드,배그,오버워치,롤,피파,방송용,PC방,조립,가정용,사무용,가성비,본체)</a
+              >
+            </div>
+            <div>
+              <button>쇼핑카트에 상품 추가하기</button>
+            </div>
+          </div>
+          <div class="item">
+            <div
+              style="
+                background-image: url(../resources/img/한성컴퓨터.png);
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: center;
+              "
+            ></div>
+            <div class="item-desc">
+              <a href="#"
+                >한성컴퓨터 TFG AX8726 데스트탑 i7
+                8700/RTX2060(로스트아크,포트나이트,배틀그라운드,배그,오버워치,롤,피파,방송용,PC방,조립,가정용,사무용,가성비,본체)</a
+              >
+            </div>
+            <div>
+              <button>쇼핑카트에 상품 추가하기</button>
+            </div>
+          </div>
+          <div class="item">
+            <div
+              style="
+                background-image: url(../resources/img/한성컴퓨터.png);
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: center;
+              "
+            ></div>
+            <div class="item-desc">
+              <a href="#"
+                >한성컴퓨터 TFG AX8726 데스트탑 i7
+                8700/RTX2060(로스트아크,포트나이트,배틀그라운드,배그,오버워치,롤,피파,방송용,PC방,조립,가정용,사무용,가성비,본체)</a
+              >
+            </div>
+            <div>
+              <button>쇼핑카트에 상품 추가하기</button>
+            </div>
+          </div>
+        </div>
+        <div id="aside2" class="aside">
+          <h3>Shopping Cart</h3>
+          <p>현재 쇼핑카트에 물품이 없습니다.</p>
+          <a href="">쇼핑카트 보기</a>
+          <form>
+            <h3>Log In</h3>
+            <span>아이디</span>
+            <p><input type="text" /></p>
+            <span>패스워드</span>
+            <p><input type="password" /></p>
+            <input type="submit" value="로그인" />
+            <input type="reset" />
+          </form>
+          <br />
+          <a href="find">회원가입</a> <a href="find">비밀번호 분실</a>
+        </div>
+      </div>
+      <div id="footer"></div>
+    </div>
+  </body>
+</html>
