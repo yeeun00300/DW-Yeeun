@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // && : AND 연산자, ||: OR 연산자
+
+      // 0. 변수 선언
+      // 1. 사용자에게 점수를 입력받는다.
+      // 2. 입력받은 점수를 바탕으로 성적구간이 될 수 있는 값을 도출한다.
+      // 3. 도출된 값을 switch문을 통해 성적을 구한다.
+      // 4. 결과를 화면에 출력한다.
+
+      //   let score = 0;
+      //   let grade = 0;
+      //   score = +prompt("점수를 입력하세요.");
+      //   if (90 <= score && 100 >= score) {
+      //     grade = `A`;
+      //   } else if (80 <= score && 89 >= score) {
+      //     grade = `B`;
+      //   } else if (70 <= score && 79 >= score) {
+      //     grade = `C`;
+      //   } else if (60 <= score && 69 >= score) {
+      //     grade = `D`;
+      //   } else {
+      //     grade = `F`;
+      //   }
+      //   document.write(`<h1>${grade}</h1>`);
+
+      let score;
+      score = prompt("점수를 입력하세요.");
+      let grade = parseInt(score / 10);
+      let result;
+      switch (grade) {
+        case 10:
+        case 9:
+          result = `A`;
+          break;
+        case 8:
+          result = `B`;
+          break;
+        case 7:
+          result = `C`;
+          break;
+        case 6:
+          result = `D`;
+          break;
+        default:
+          result = `F`;
+          break;
+      }
+      document.write(`<h1>당신의 학점은 : ${result}</h1>`);
+    </script>
+  </body>
+</html>

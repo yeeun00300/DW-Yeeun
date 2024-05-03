@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>지역변수</title>
+  </head>
+  <body>
+    <script>
+      let num = 0; // 전역 변수
+      // scope 전역변수에서 선언을 하지않고 함수에서 할당만 된다면 윈도우 scope까지 나감
+
+      //함수 선언식
+      function showAlert() {
+        let message; // 지역 변수
+        alert(num);
+      }
+
+      alert(message);
+
+      //함수 표현식
+      const func = function () {};
+    </script>
+  </body>
+</html>

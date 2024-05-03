@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>조건문 연습</title>
+  </head>
+  <body>
+    <script>
+      // 0. 변수 선언
+      // 1. 첫번째 숫자를 입력받을 프롬프트를 띄운다.
+      // 2. 두번째 숫자를 입력받을 프롬프트를 띄운다.
+      // 3. 연산자를 입력받을 프롬프트를 띄운다.
+      // 4. 연산자를 확인할 조건문 안에서 계산 결과를 도출한다.
+      // 5. 화면에 출력한다.
+
+      let num1 = 0;
+      let num2 = 0;
+      let calc = 0;
+      let result = 0;
+
+      // num1 = parseInt(prompt()); ->> 숫자를 정수형으로 바꿔줌
+      num1 = +prompt("첫번째 숫자를입력하세요");
+      num2 = +prompt("두번째 숫자를입력하세요");
+      calc = prompt("연산자를 입력하세요 (+,-,*,/,% 중 하나)");
+
+      //   switch (calc) {
+      //     case `+`:
+      //       result = num1 + num2;
+      //       break;
+      //     case `-`:
+      //       result = num1 - num2;
+      //       break;
+      //     case `*`:
+      //       result = num1 * num2;
+      //       break;
+      //     case `/`:
+      //       result = num1 / num2;
+      //       break;
+      //     case `%`:
+      //       result = num1 % num2;
+      //       break;
+      //     default:
+      //       alert("연산자를 입력해주세요.");
+      //       break;
+      //   }
+
+      if (calc == `+`) {
+        result = num1 + num2;
+      } else if (calc == `-`) {
+        result = num1 - num2;
+      } else if (calc == `*`) {
+        result = num1 * num2;
+      } else if (calc == `/`) {
+        result = num1 / num2;
+      } else if (calc == `%`) {
+        result = num1 % num2;
+      } else {
+        alert("연산자를 입력해주세요.");
+      }
+
+      document.write(`<h1>${num1} ${calc} ${num2} = ${result}</h1>`);
+    </script>
+  </body>
+</html>
