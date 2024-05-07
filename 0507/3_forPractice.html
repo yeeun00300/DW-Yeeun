@@ -21,8 +21,21 @@
       // *****
       for (let i = 1; i <= 5; i++) {
         for (let j = 1; j <= 5; j++) {
-          let j = "*";
-          document.write(`<span>${j}</span>`);
+          document.write(`<span>${`*`}</span>`);
+        }
+        document.write(`<br>`);
+      }
+
+      // *
+      // **
+      // ***
+      // ****
+      // *****
+      document.write(`<br>`);
+      let k = 1;
+      for (let i = 1; i <= 5; i++) {
+        for (let j = 1; j <= k * j; j++) {
+          document.write(`<span>${`*`}</span>`);
         }
         document.write(`<br>`);
       }
