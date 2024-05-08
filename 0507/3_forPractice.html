@@ -73,7 +73,7 @@
         for (let j = 5; j >= i; j--) {
           document.write(`*`);
         }
-        for (let k = 1; k <= i; k++) {
+        for (let k = 2; k <= i; k++) {
           document.write(`&nbsp`);
         }
         document.write(`<br>`);
@@ -101,11 +101,109 @@
       document.write(`<br>`);
       let number = 0;
       let sum = 0;
-      number = prompt("숫자를 입력하세요.");
+      number = +prompt("숫자를 입력하세요.");
       for (let i = 1; i <= number; i++) {
         sum = sum + i;
       }
       document.write(`1부터 ${number}까지의 합은 ${sum}입니다.`);
+
+      //         *
+      //        ***
+      //       *****
+      //      *******
+      //     *********
+      //    ***********
+      //   *************
+      //  ***************
+      // *****************
+      //*******************
+
+      document.write(`<br>`);
+      document.write(`<br>`);
+
+      for (let i = 1; i <= 10; i++) {
+        for (let k = 10; k > i; k--) {
+          document.write(`&nbsp`);
+        }
+        for (let j = 1; j <= i; j++) {
+          document.write(`*`);
+        }
+        for (let j = 1; j < i; j++) {
+          document.write(`*`);
+        }
+        document.write(`<br>`);
+      }
+
+      document.write(`<br>`);
+      for (let i = 1; i <= 10; i++) {
+        for (let k = 10; k > i; k--) {
+          document.write(`&nbsp`);
+        }
+        for (let j = 1; j <= 2 * i - 1; j++) {
+          document.write(`*`);
+        }
+        document.write(`<br>`);
+      }
+
+      //*******************
+      // *****************
+      //  ***************
+      //   *************
+      //    ***********
+      //     *********
+      //      *******
+      //       *****
+      //        ***
+      //         *
+      document.write(`<br>`);
+      for (let i = 1; i <= 10; i++) {
+        for (let k = 1; k < i; k++) {
+          document.write(`&nbsp`);
+        }
+        for (let j = 19; j >= 2 * i - 1; j--) {
+          document.write(`*`);
+        }
+        document.write(`<br>`);
+      }
+      //         *
+      //        ***
+      //       *****
+      //      *******
+      //     *********
+      //    ***********
+      //   *************
+      //  ***************
+      // *****************
+      //*******************
+      // *****************
+      //  ***************
+      //   *************
+      //    ***********
+      //     *********
+      //      *******
+      //       *****
+      //        ***
+      //         *
+      document.write(`<br>`);
+      document.write(`<br>`);
+      for (let i = 1; i <= 10; i++) {
+        for (let k = 10; k > i; k--) {
+          document.write(`&nbsp`);
+        }
+        for (let j = 1; j <= 2 * i - 1; j++) {
+          document.write(`*`);
+        }
+        document.write(`<br>`);
+      }
+      for (let i = 1; i <= 9; i++) {
+        for (let k = 1; k <= i; k++) {
+          document.write(`&nbsp`);
+        }
+        for (let j = 17; j >= 2 * i - 1; j--) {
+          document.write(`*`);
+        }
+        document.write(`<br>`);
+      }
     </script>
   </body>
 </html>
