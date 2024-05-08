@@ -21,7 +21,7 @@
       // *****
       for (let i = 1; i <= 5; i++) {
         for (let j = 1; j <= 5; j++) {
-          document.write(`<span>${`*`}</span>`);
+          document.write(`*`);
         }
         document.write(`<br>`);
       }
@@ -32,13 +32,80 @@
       // ****
       // *****
       document.write(`<br>`);
-      let k = 1;
+
       for (let i = 1; i <= 5; i++) {
-        for (let j = 1; j <= k * j; j++) {
-          document.write(`<span>${`*`}</span>`);
+        for (let j = 1; j <= i; j++) {
+          document.write(`*`);
         }
         document.write(`<br>`);
       }
+
+      //    *          5
+      //   **         45
+      //  ***        345
+      // ****       2345
+      //*****      12345
+      document.write(`<br>`);
+      for (let i = 1; i <= 5; i++) {
+        //공백 4 3 2 1 0
+        //    i          k
+        //    1        4 3 2 1
+        //    2         4 3 2
+        //    3          4 3
+        //    4           4
+        //    5          false
+        for (let k = 4; k >= i; k--) {
+          document.write(`&nbsp`);
+        }
+        for (let j = 1; j <= i; j++) {
+          document.write(`*`);
+        }
+        document.write(`<br>`);
+      }
+
+      //*****
+      //****
+      //***
+      //**
+      //*
+      document.write(`<br>`);
+      for (let i = 1; i <= 5; i++) {
+        for (let j = 5; j >= i; j--) {
+          document.write(`*`);
+        }
+        for (let k = 1; k <= i; k++) {
+          document.write(`&nbsp`);
+        }
+        document.write(`<br>`);
+      }
+
+      //*****
+      // ****
+      //  ***
+      //   **
+      //    *
+      document.write(`<br>`);
+      for (let i = 1; i <= 5; i++) {
+        for (let k = 1; k < i; k++) {
+          document.write(`&nbsp`);
+        }
+        for (let j = 5; j >= i; j--) {
+          document.write(`*`);
+        }
+        document.write(`<br>`);
+      }
+
+      // 1 부터 사용자가 입력한 숫자까지의 합을 더해서 화면에 출력하세요.
+      // 사용자로부터 숫자 입력받기
+      // 입력받은 숫자 대입하기
+      document.write(`<br>`);
+      let number = 0;
+      let sum = 0;
+      number = prompt("숫자를 입력하세요.");
+      for (let i = 1; i <= number; i++) {
+        sum = sum + i;
+      }
+      document.write(`1부터 ${number}까지의 합은 ${sum}입니다.`);
     </script>
   </body>
 </html>
