@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>break & continue</title>
+  </head>
+  <body>
+    <script>
+      document.write(`<h1>&lt;break&gt;</h1>`);
+      for (let i = 0; i < 10; i++) {
+        if (i == 3) {
+          break; //break가 포함된 가장 가까운 반복문을 멈춤
+        }
+        document.write(`<h3>${i}</h3>`);
+      }
+      document.write(`<hr>`);
+
+      let j = 0;
+      while (true) {
+        document.write(`<h3>${j}</h3>`);
+        j++;
+        if (j == 5) {
+          break;
+        }
+      }
+
+      document.write(`<hr>`);
+
+      document.write(`<h1>&lt;continue&gt;</h1>`);
+      for (let i = 0; i < 10; i++) {
+        if (i == 3) {
+          continue; //i == 3 일때 조건문을 실행하지 않고 건너뛰고 다음번 계속 시행
+        }
+        document.write(`<h3>${i}</h3>`);
+      }
+
+      let stage = 0;
+      while (true) {
+        document.write(`<h3>${stage}</h3>`);
+        j++;
+        if (stage == 5) {
+          continue;
+        }
+        if (stage >= 11) {
+          // 엔딩장면
+          break;
+        }
+      }
+
+      for (let i = 1; i <= 10; i++) {
+        if (i % 2 == 1) {
+          continue;
+        }
+        document.write(`<h2>${i}</h2>`);
+      }
+      document.write(`<hr>`);
+    </script>
+  </body>
+</html>
