@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>숫자맞추기</h1>
+    <p>1부터 100사이의 정수를 입력하세요.</p>
+    <input id="number" type="text" value="" />
+    <button onclick="clickFn()">숫자 추측</button>
+    <!--  onclick(눌렀을때)= "clickFn()함수 실행"    -->
+    <p id="message"></p>
+  </body>
+  <script>
+    //<변수 선언>----------------------------------------------------------------------------------------------
+    const input = document.querySelector("#number"); // document 내의 input 태그를 접근하여 input(변수)에 대입
+    const pTag = document.querySelector("#message"); // document 내의 p 태그에 접근하여 pTag(변수)에 대입
+    let randNum = 0; // 컴퓨터가 뽑은 랜덤 숫자
+    let resStr = ""; // 숫자 결과 알려주기 (resultString)
+    const MAX_COUNT = 10; // 숫자 추측 횟수
+    let count = 0; // 시도한 횟수
+
+    //<컴퓨터가 랜덤 숫자(1~100) 추출하기>------------------------------------------------------------------------
+    function getRandom() {
+      return parseInt(Math.random() * 100) + 1; //Math.random()-->0부터 1사이의 숫자, parseInt()-->정수형으로 변환
+    }
+    randNum = getRandom();
+
+    //<버튼을 눌렀을때 input 태그의 값을 가져와 컴퓨터의 랜덤숫자와 비교하기>-----------------------------------------
+    function clickFn() {
+      if (count == MAX_COUNT) {
+        reset();
+        return false; //다른 서버에서 함수를 적용할 때 적용여부를 확인하기 위해서 false 작성
+      } // '게임에서 패배하셨습니다-->태그를 보기위해서 맨 위에 작성'
+      let inputNum = input.value; //사용자가 input태그에 입력한 숫자(value)를 inputNum이라는 변수에 대입
+      //<randNum(랜덤숫자)와 inputNum(사용자가 입력한 숫자) 비교>-------------------------------------------------
+      if (randNum == inputNum) {
+        resStr = `정답입니다!`;
+        alert(resStr);
+        reset();
+      } else {
+        count++; //시도횟수 카운트하기
+        if (randNum > inputNum) {
+          resStr = `입력하신 숫자보다 큽니다. 입력하신 숫자 : ${inputNum}<br>`;
+        } else {
+          resStr = `입력하신 숫자보다 작습니다. 입력하신 숫자 : ${inputNum}<br>`;
+        }
+      }
+      pTag.innerHTML += resStr; // 추측에 대한 내용과 입력한 숫자를 화면에 나오게 하기 (p태그)
+      //<횟수를 모두 소진했을때>---------------------------------------------------------------------------------
+      if (MAX_COUNT == count) {
+        resStr = `게임에서 패배하셨습니다. 랜덤 숫자는 ${randNum} 이었습니다.`;
+        pTag.innerHTML = resStr;
+      }
+    }
+    //<정답을 맞추거나 시도횟수를 소진 후 게임 리셋하는 함수>----------------------------------------------------------
+    function reset() {
+      count = 0;
+      randNum = getRandom();
+      pTag.innerHTML = "";
+      resStr = "";
+      input.value = "";
+    }
+  </script>
+</html>
