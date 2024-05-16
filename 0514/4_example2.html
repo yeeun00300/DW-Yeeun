@@ -17,7 +17,7 @@
       padding: 20px;
       height: 100%;
     }
-    div {
+    body > div {
       display: flex;
       gap: 10px;
       height: 80px;
@@ -30,7 +30,15 @@
   </style>
   <body>
     <div id="birthCalc">
-      <input id="birthYear" type="text" placeholder="출생년도를 입력하세요." />
+      <input
+        id="birthYear"
+        type="text"
+        pattern="[0-9]{4}"
+        title="출생년도 4자리 숫자"
+        placeholder="출생년도를 입력하세요."
+        required
+        oninput="this.value = this.value.replace(/[^0-9]$/g,'')"
+      />
       <button onclick="age()">나이 계산</button>
       <div id="age" class="result"></div>
     </div>
@@ -54,23 +62,34 @@
       // 함수를 작성하세요. (result div에 결과 표시)
       const now = new Date();
       const year = now.getFullYear();
+      // const year = new Date().getFullYear(); -->> 한줄로도 작성가능
       function age() {
         const input = document.querySelector("#birthYear");
-        const inputValue = input.value;
+        //document.querySelector("birthCalc > input").value -->> css처럼 작성가능, 한줄로 작성가능
+        const inputValue = input.value; // inputValue는 입력된 값, input.value는 input 그 자체의 값
         let result = year - inputValue;
         const div1 = document.querySelector("#age");
+        if (result < 0) {
+          alert("출생년도는 현재년도보다 클 수 없습니다.");
+          input.value = "";
+          return false;
+        }
         div1.innerHTML = `${result}`;
       }
       // 2. 사각형의 가로 너비와 세로 높이를 입력하여 사각형의 넓이를 계산하는 함수를
       // 작성하세요. (result div에 결과 표시)
       function area() {
+        // const inputs = document.querySelectorAll("#square > input");
+        // const width = inputs[0].value;
+        // const length = inputs[1].value;
+        // inputs 를 배열취급하여 쓸 수 있음 (배열은 아님 )
         const width = document.querySelector("#width");
         const length = document.querySelector("#length");
         const widthValue = width.value;
         const lengthValue = length.value;
         let result = widthValue * lengthValue;
         const div2 = document.querySelector("#area");
-        div2.innerHTML = `${result}`;
+        div2.innerHTML = `${result}m<sup>2</sup>`;
       }
       // 3. 원래 가격과 할인율을 입력하면 할인 가격을 계산해주는 함수를 작성하세요.
       // (할인된 가격은 정수로 표현하세요. result div에 결과 표시)

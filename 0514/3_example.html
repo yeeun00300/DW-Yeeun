@@ -45,6 +45,7 @@
     console.log(arr);
     // 9. 비어있는 배열을 선언하고 1 ~ 100 까지의 숫자를 추가해보세요.(반복문 사용)
     const arr2 = [];
+    // (let i = 2; i <= 100 ; i = i + 2 )
     for (i = 1; i <= 100; i++) {
       arr2.push(i);
     }
@@ -66,7 +67,7 @@
     // 요소가 화면에 출력되는 함수를 작성하세요.
 
     const body = document.querySelector("body");
-
+    // write innerHTML 프로퍼티에 전달되는 값은 문자열이어야한다.
     function add(message) {
       const el = document.createElement("p");
       el.innerHTML = message;
