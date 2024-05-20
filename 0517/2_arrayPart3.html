@@ -145,22 +145,92 @@
     //   [7, 8, 9],
     // ];
 
-    const doubleArr2 = doubleArr.map(function (el) {
-      let double = [];
-      for (i = 0; i < el.length; i++) {
-        double.push(el[i] * 2);
-      }
-      return double;
-    });
-
     // const doubleArr2 = doubleArr.map(function (el) {
-    //   let double = 0;
+    //   let double = [];
     //   for (i = 0; i < el.length; i++) {
-    //     double = el[i] * 2;
+    //     double.push(el[i] * 2);
     //   }
     //   return double;
     // });
 
+    const doubleArr2 = doubleArr.map(function (a) {
+      return a.map(function (b) {
+        return b * 2;
+      });
+    });
+
     console.log(doubleArr2);
+
+    // 3. filter() 함수 ⭐⭐⭐⭐
+    // 배열의 모든 요소에 대하여 반복적으로 명시된 함수를 실행한 후
+    // 그 결과값이 true인 요소들만을 새로운 배열로 반환한다.
+    document.write(`<h3>3. filter() 함수</h3>`);
+    const numberArr2 = [1, 2, 3, 4, 5];
+    // [4, 5];
+    let result = [];
+    // for(let i = 0; i < numberArr2.length; i++) {
+    //   if(numberArr2[i] > 3) {
+    //     result.push(numberArr2[i]);
+    //   }
+    // }
+    result = numberArr2.filter(function (v) {
+      return v > 3;
+    });
+    document.write(`<h3>numberArr2 : [${numberArr2}]</h3>`);
+    document.write(`<h3>result : [${result}]</h3>`);
+
+    const guys = [
+      { name: "덕배", money: 500000 },
+      { name: "베컴", money: 700000 },
+      { name: "홀란드", money: 600000 },
+      { name: "포든", money: 500000 },
+    ];
+    // [{ name: "베컴", money: 700000 },{ name: "홀란드", money: 600000 }]
+
+    const guys2 = guys.filter(function (el) {
+      return el.money > 500000;
+    });
+
+    console.log(guys2);
+    // money > 500000, name == "홀란드"
+    const rich = guys.filter(function (el) {
+      return el.money > 500000 && el.name == "홀란드";
+    });
+    console.log(rich);
+
+    // 4. reduce() 함수
+    // 해당 배열의 모든 요소를 하나의 값으로 줄이기 위해,
+    // 두 개의 인수를 전달 받는 함수를 실행한다.
+    // 이 때, 명시된 함수에 배열의 첫번째 요소와 두번째 요소를 인수로 전달하고 실행한다.
+    // 그 결과 반환된 결과값에 세번째 요소를 다시 인수로 전달한다.
+    document.write(`<h1>4.reduce() 함수</h1>`);
+    const numArr3 = [1, 2, 3, 4, 5];
+    const result2 = numArr3.reduce(function (x, y) {
+      return x + y;
+    }, 5);
+    //1 + 2 + 3 + 4 + 5 = 15
+    document.write(`<h3>원본배열 : [${numArr3}]</h3>`);
+    document.write(`<h3>reduce 결과 : [${result2}]</h3>`);
+    const result3 = numArr3.reduce(function (x, y) {
+      return x - y;
+    });
+    // 1 - 2 - 3 - 4 - 5 = -13]
+    document.write(`<h3>reduce 결과 : [${result3}]</h3>`);
+
+    // 1. accumulator    : 누산기, 누적값
+    // 2. currentValue   : 처리할 현재 요소
+    // 3. currentIndex   : 처리할 현재 요소의 인덱스
+    // 4. array          : 대상 배열 전체
+    // Array.reduce(function(acc,cur,idx,arr){
+
+    // }, initialValue)
+
+    // 5. reduceRight() 함수
+    // reduce() 함수와 같은 방식으로 실행되며,
+    // 배열의 마지막 요소부터 줄이기 시작한다.
+    const result4 = numArr3.reduceRight(function (x, y) {
+      return x - y;
+    });
+    document.write(`<h3>reduceRight 결과 : ${result4}</h3>`);
   </script>
 </html>

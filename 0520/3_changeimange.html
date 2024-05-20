@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <img
+      id="image"
+      src="../resources/img/커비.webp"
+      width="500"
+      height="auto"
+    />
+    <br />
+    <button onclick="changeImage()">눌러보세요</button>
+  </body>
+  <script>
+    let lastIndex = 0;
+    const image = [];
+    function changeImage() {
+      // 사진 6장 정도를 준비
+      // 사진의 경로를 배열에 담는다.
+      image.push("../resources/img/1.png");
+      image.push("../resources/img/2.png");
+      image.push("../resources/img/3.png");
+      image.push("../resources/img/4.png");
+      image.push("../resources/img/5.png");
+      image.push("../resources/img/6.png");
+      // 클릭할 때마다 0 ~ 5 의 랜덤 숫자를 뽑는다.
+      const num = makeRandNum(image.length);
+      document.querySelector("#image").src = image[num];
+    }
+    function makeRandNum(length) {
+      while (true) {
+        const randNum = parseInt(Math.random() * length);
+        if (randNum !== lastIndex) {
+          lastIndex = randNum;
+          return randNum;
+        }
+      }
+    }
+  </script>
+</html>
