@@ -126,6 +126,8 @@
     </div>
   </body>
   <script>
+    //keydown 키보드 눌렸을때 (무조건발생)
+    //keypress 키보드 눌러서 화면에 텍스트 입력됐을때(입력안되면 발생안함)
     const myInput = document.getElementById("my-input");
     const key = document.getElementById("key");
     const code = document.getElementById("code");
@@ -143,7 +145,18 @@
 
     function downkeyEvent(e) {
       //기본 키 막아주는 이벤트
-      e.preventDefault();
+      if (
+        e.code == "F1" ||
+        e.code == "F3" ||
+        e.code == "F5" ||
+        e.code == "F6" ||
+        e.code == "F7" ||
+        e.code == "F10" ||
+        e.code == "F11" ||
+        e.code == "F12"
+      ) {
+        e.preventDefault();
+      }
       //눌린 키에 대한 요소를 가져온다.
       const el = document.querySelector(`#${e.code}`);
       console.log(`key : ${e.key}, code : ${e.code}`);
