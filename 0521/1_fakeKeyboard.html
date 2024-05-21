@@ -135,6 +135,9 @@
     const keypress = document.getElementById("keypress");
     const keyup = document.getElementById("keyup");
 
+    const dKey = document.getElementById("KeyD");
+    console.log(dKey.style.backgroundColor);
+
     function presskeyEvent() {
       keypress.classList.add("check");
 
@@ -161,6 +164,23 @@
       const el = document.querySelector(`#${e.code}`);
       console.log(`key : ${e.key}, code : ${e.code}`);
 
+      //외부 파일(css)에 대한 엘리먼트 접근
+      // const rootStyles = window.getComputedStyle(el); **최상위 접근
+      // console.log(rootStyles);
+
+      colorArr = [];
+      for (let i = 0; i < 3; i++) {
+        colorArr.push(parseInt(Math.random() * 256));
+      }
+      const luma =
+        0.2126 * colorArr[0] + 0.7152 * colorArr[1] + 0.0722 * colorArr[2];
+
+      el.style.setProperty("--main-color", `rgb(${colorArr})`); //css 변수 적용하고 그 값을 적용시킬때 쓰는 함수
+      el.style.setProperty(
+        "--font-color",
+        ` ${luma <= 155 ? "white" : "black"}`
+      );
+
       //keydown div에 check 클래스를 추가한다.
       keydown.classList.add("check");
       //눌린 키를 화면상에서 회색으로 변경한다.(클래스를 적용하여)
@@ -185,6 +205,14 @@
       setTimeout(function () {
         keyup.classList.remove("check");
       }, 300);
+      //AltRight는 keyup에만 발생하기 때문에 여기에 적어줌
+      if (e.code == "AltRight") {
+        // on 클래스 추가했다가 0.3초 뒤에 제거
+        el.classList.add("on");
+        setTimeout(function () {
+          el.classList.remove("on");
+        }, 300);
+      }
     }
 
     //input에 입력했을때 event 추가

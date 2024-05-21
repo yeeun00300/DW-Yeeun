@@ -92,8 +92,13 @@
 }
 
 .on {
-  color: white;
-  background-color: #7e7e7e;
+  color: var(--font-color);
+  background-color: var(--main-color);
   box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
   transform: translateY(1px);
+}
+
+:root {
+  --main-color: white;
+  --font-color: white;
 }
