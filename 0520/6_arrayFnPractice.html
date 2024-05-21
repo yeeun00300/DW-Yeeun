@@ -17,27 +17,33 @@
     ];
 
     // 1. 학생 이름을 대문자로 변환
-    const upperCase = students.map(function (a) {
+    let upperCase = students.map(function (a) {
       return a.name.toUpperCase();
     });
+
+    upperCase = students.map((v) => v.name.toUpperCase());
     console.log(upperCase);
 
     // 2. 점수가 7점 이상인 학생 필터링
-    const result = students.filter(function (a) {
+    let result = students.filter(function (a) {
       return a.score > 7;
     });
+    result = students.filter((v) => v.score > 7);
     console.log(result);
 
     // 3. 모든 학생의 점수 합계 구하기
-    const sum = students.reduce(function (a, b) {
+    let sum = students.reduce(function (a, b) {
       return a + b.score;
     }, 0);
+    sum = students.reduce((a, b) => a + b.score, 0);
     console.log(sum);
 
     // 4. 모든 학생의 평균 점수 구하기(반올림)
-    const average = students.reduce(function (a, b) {
-      return Math.round(a + b.score / 6);
-    }, 0);
+    let average = Math.round(
+      students.reduce(function (a, b) {
+        return a + b.score;
+      }, 0) / students.length
+    );
     console.log(average);
 
     const products = [
@@ -50,8 +56,35 @@
     ];
 
     // 1. 모든 제품의 가격에 10%의 세금을 추가한 배열을 만드세요.
+    let taxPrice = products.map(function (el) {
+      el.price = el.price * 1.1;
+      return el;
+    });
+    // taxPrice = products.map((el) => {
+    //   el.price = el.price * 1.1;
+    //   return el;
+    // });
+    console.log(taxPrice);
+
     // 2. 세금이 추가된 가격이 100달러 이상인 제품들만 필터링하세요.
+    let expensive = products.filter(function (el) {
+      return el.price * 1.1 > 100;
+    });
+    expensive = products.filter((el) => el.price * 1.1 > 100);
+    console.log(expensive);
+
     // 3. 필터링된 제품들의 총 가격을 계산하세요.
+    let price = expensive.reduce(function (acc, cur) {
+      return acc + cur.price;
+    }, 0);
+    price = expensive.reduce((acc, cur) => acc + cur.price, 0);
+    console.log(price);
+
     // 4. 필터링된 제품들의 평균 가격을 계산하세요.
+    let averagePrice =
+      expensive.reduce(function (a, b) {
+        return a + b.price;
+      }, 0) / expensive.length;
+    console.log(averagePrice);
   </script>
 </html>
