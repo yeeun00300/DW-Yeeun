@@ -40,7 +40,6 @@
         <div class="bubble friend-bubble">잘자..</div>
         <!-- <div class="bubble my-bubble">왜 안자</div> -->
       </div>
-
       <!-- 대화 작성부 -->
       <div class="footer">
         <textarea id="input" placeholder="메세지를 입력하세요"></textarea>
@@ -75,6 +74,7 @@
       div.classList.add("bubble", "my-bubble");
       // chat-box 에 div를 추가한다.
       chatBox.append(div);
+      chatBox.scrollTop = chatBox.scrollHeight;
       // 입력된 문자열을 제거해준다.
       input.value = "";
     }
