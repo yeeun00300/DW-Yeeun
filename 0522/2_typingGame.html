@@ -137,6 +137,7 @@
         words.forEach(function (el) {
           const rectSize = el.getBoundingClientRect(); // 최종 렌더링 된 크기 반환(현재 뷰포트에서의 요소의 상대적인 위치)
           el.style.top = `${rectSize.top - 75}px`;
+          // console.log(input.style.height);
           console.log(getComputedStyle(input).height.split("px")[0]); // 외부에서 가져올때 쓰는 함수
           if (
             el.getBoundingClientRect().bottom >
