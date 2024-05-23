@@ -49,4 +49,38 @@
       </div>
     </div>
   </body>
+  <script>
+    // script와 연결할 html 요소를 가져온다. input,sendBtn,chat-box
+    const input = document.querySelector("#input");
+    const send = document.querySelector("#sendBtn");
+    const chatBox = document.querySelector("#chat-box");
+
+    // 보내기 버튼 눌렀을 때 보내는 함수 만들기
+    function sendMyText() {
+      const newMessage = input.value;
+      if (newMessage.length == 0) {
+        return false;
+      }
+      let changeMessage = newMessage.replaceAll(" ", "&nbsp;");
+      changeMessage = newMessage.replaceAll("\n", "<br />");
+      const div = document.createElement("div");
+      div.innerHTML = changeMessage;
+      div.classList.add("bubble", "my-bubble");
+      chatBox.append(div);
+      chatBox.scrollTop = chatBox.scrollHeight;
+      input.value = "";
+    }
+
+    // 엔터눌렀을때 메세지 보내기
+    function sendMyTextByEnter(e) {
+      if (e.key == "Enter" && !e.shiftKey) {
+        sendMyText();
+        e.preventDefault();
+      }
+    }
+
+    //함수를 어떤것을 눌렀을 때 event를 추가할지 알아본다.
+    send.addEventListener("click", sendMyText);
+    input.addEventListener("keypress", sendMyTextByEnter);
+  </script>
 </html>
