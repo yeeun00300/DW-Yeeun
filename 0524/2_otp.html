@@ -53,9 +53,10 @@
           nextInput.removeAttribute("disabled");
           nextInput.focus();
         }
-        if (index === 3) {
-          inputs[3].focus();
-        }
+        // if (index === 3) {
+        //   inputs[3].focus();
+        // } -->keydown에 이벤트 추가하는 부분 만들어보기
+
         // 백스페이스로 지우는 부분
         if (e.key === "Backspace") {
           inputs.forEach((el2, index2) => {
