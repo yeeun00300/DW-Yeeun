@@ -53,6 +53,9 @@
           nextInput.removeAttribute("disabled");
           nextInput.focus();
         }
+        if (index === 3) {
+          inputs[3].focus();
+        }
         // 백스페이스로 지우는 부분
         if (e.key === "Backspace") {
           inputs.forEach((el2, index2) => {
