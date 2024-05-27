@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="../resources/js/jquery-3.6.4.js"></script>
+  </head>
+  <body>
+    <button>이미지추가</button>
+  </body>
+  <script>
+    const imgArr = ["1.png", "2.png", "3.png", "4.png", "5.png", "6.png"];
+
+    $("button").on("click", function () {
+      const randNum = parseInt(Math.random() * 6);
+      const img = $(
+        `<img src = "../resources/img/${imgArr[randNum]}" 
+          width="200"
+          height="200"
+        />`
+      );
+      img.appendTo("body");
+    });
+  </script>
+</html>

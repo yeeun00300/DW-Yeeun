@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>속성 선택자 연습</title>
+    <script src="../resources/js/jquery-3.6.4.js"></script>
+  </head>
+  <body>
+    <h1>회원가입</h1>
+    <form>
+      <fieldset>
+        <legend>필수 입력 사항</legend>
+        <strong
+          >ID<input type="text" name="user" placeholder="아이디 10글자 이내" />
+        </strong>
+        <button>중복확인</button>
+        <br />
+        <!-- br 대신 div 쓰게 되면 블록요소이기때문에 다음에 오는 내용은 자연스럽게 다음행으로 이어짐 -->
+        <strong
+          >비밀번호<input
+            type="password"
+            placeholder="영문,숫자,특수문자 포함 8자 이상"
+        /></strong>
+        <br />
+        <strong>비밀번호 확인<input type="password" /></strong>
+        <br />
+        <strong
+          >Email<input type="text" name="ID" />
+          <select>
+            <option value="naver">@naver.com</option>
+            <option value="Google">@gmail.com</option>
+            <option value="daum">@daum.net</option>
+            <option value="none" selected>직접입력</option>
+          </select></strong
+        >
+      </fieldset>
+      <fieldset>
+        <legend>추가 정보</legend>
+        프로필 사진 <input type="file" accept="image/*" />
+        <!-- image/* [*하면 모든 확장자 종류 다 가능] -->
+        <br /><br />
+        성별 :
+        <input type="radio" name="gender" id="male" />
+        <label for="male">남자</label>
+        <input type="radio" name="gender" id="female" />
+        <label for="female">여자</label>
+        <!-- <input id>과<label for>은 연결해주는 것, type radio 한가지만 체크하고 싶으면 name 속성으로 묶어주기 -->
+        <br /><br />
+        생년월일 : <input type="date" /> <br /><br />
+        취미
+        <br />
+        <input type="checkbox" id="baseball" name="hobby" />
+        <label for="baseball">야구</label>
+        <input type="checkbox" id="basketball" name="hobby" />
+        <label for="basketball">농구</label>
+        <input type="checkbox" id="soccer" name="hobby" />
+        <label for="soccer">축구</label>
+        <br />
+        <input type="checkbox" id="study" name="hobby" />
+        <label for="study">공부</label>
+        <input type="checkbox" id="listening" name="hobby" />
+        <label for="listening">음악감상</label>
+        <br />
+        <input type="checkbox" id="etc" name="hobby" />
+        <label for="etc">기타<input type="text" /></label>
+        <br /><br />
+        자기소개
+        <br />
+        <textarea rows="10" cols="100"></textarea>
+      </fieldset>
+      <br />
+      <input type="submit" value="회원가입" />
+      <input type="reset" value="다시입력" />
+      <input type="button" value="이전으로" onclick="history.go(-1);" />
+      <!-- 이전으로 돌아가기 속성 onclick="history.go(-1);" -->
+    </form>
+  </body>
+  <script>
+    $(":input").css("backgroundColor", "pink").css("border", "2px solid lime");
+    $(":text").css("border", "3px solid blue");
+    $(":password").css("border", "3px solid blue");
+    $(":file").css("border", "3px solid red");
+    $(":submit").css("backgroundColor", "green");
+    $(":button").css("backgroundColor", "yellow");
+  </script>
+</html>
