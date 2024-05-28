@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>조작관련함수</title>
+    <script src="../resources/js/jquery-3.6.4.js"></script>
+  </head>
+  <style>
+    p {
+      cursor: pointer;
+    }
+    img {
+      width: 200px;
+      height: 200px;
+    }
+  </style>
+  <body>
+    <p>1</p>
+    <p>2</p>
+    <p>3</p>
+    <p>4</p>
+  </body>
+  <script>
+    const imgArr = ["1.png", "2.png", "3.png", "4.png"];
+    $("p").on("click", function () {
+      const index = $(this).index(); // 상위태그(body)내에서의 index 번호를 작성함
+      const pTags = $("p");
+      console.log(pTags);
+
+      // 요소 내부에 추가
+      const imgTag = `<img src="../resources/img/${imgArr[index]}"/>`;
+      // ~에 ~무엇을 == append
+      // $(this).append(imgTag);
+      // ~무엇을 ~에 ==> appendTo
+      // $(imgTag).appendTo(this);
+      // ~에 ~무엇을 ==> prepend
+      // $(this).prepend(imgTag);
+      // ~무엇을 ~에 ==> prependTo
+      // $(imgTag).prependTo(this);
+
+      // 요소 외부에 추가
+      // $(this).after(imgTag);
+      // $(imgTag).insertAfter(this);
+      // $(this).before(imgTag);
+      $(imgTag).insertBefore(this);
+    });
+  </script>
+</html>

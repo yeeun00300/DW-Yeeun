@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>부모요소 확인</title>
+    <script src="../resources/js/jquery-3.6.4.js"></script>
+  </head>
+  <style>
+    div {
+      border: 3px solid orange;
+    }
+  </style>
+  <body>
+    <div>
+      <p>무궁화 꽃이 피었습니다</p>
+    </div>
+
+    <p id="pTag">은주는 예쁘다~~!</p>
+
+    <div>
+      <p>사뿐히 즈려밟고 가시옵소서</p>
+    </div>
+  </body>
+  <script>
+    // p  태그들에 클릭 이벤트를 달아준다.
+    // $("p").on("click", function () {
+    //   // 선택된 p 태그를 가져온다.
+    //   const pTags = this;
+    //   console.log(pTags);
+    //   // 선택된 p 태그의 부모 요소를 가져온다.
+    //   const pTagsParent = $(pTags).parent();
+    //   console.log(pTagsParent);
+    //   // 부모 요소가 div 태그인지 확인한다.
+    //   const parent = $(pTagsParent).prop("tagName");
+    //   console.log(parent);
+    //   // 부모 요소가 div 태그라면 선택된 p 태그의 텍스트를 가져온다.
+    //   if (parent == "DIV") {
+    //     // 새로운 p 태그를 생성하여 부모요소에 추가한다.(폰트 색상 변경)
+    //     const text = $(pTags).text();
+    //     console.log(text);
+    //     const pTags2 = `<p style="color:red;">${text}</p>`;
+    //     // $(pTagsParent).append(pTags2);
+    //     $(pTagsParent).append($(pTags).clone(true).css("color", "red"));
+    //   } else {
+    //     // 부모 요소가 div 태그가 아니라면 "작업대상이 아닙니다." 라는 문구를 출력(alert)
+    //     alert("작업대상이 아닙니다.");
+    //   }
+    // });
+
+    $("div").on("click", "p", function (e) {
+      console.log(this);
+      const pTag = e.target;
+      $(this).parent("div").append($(pTag).clone().css("color", "red"));
+    });
+    // clone()에 true가 없어도 div의 이벤트 핸들링이 되기 때문에 생겨난 p태그를 눌러도 작동
+  </script>
+</html>
