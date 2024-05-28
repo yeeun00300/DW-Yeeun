@@ -107,6 +107,7 @@
     // 사용자가 입력한 텍스트와 동일한 id 를 가진 span 태그를 제거한다.
     input.addEventListener("change", function () {
       const word = document.querySelector(`span[id=${input.value}]`);
+      console.log(word);
       if (word != null) {
         word.remove();
         score = score + 100;

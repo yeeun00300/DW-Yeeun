@@ -86,14 +86,18 @@
     function init() {
       words.forEach(function (el) {
         const span = `<span>${el}</span>`;
-        $(span).addClass("word");
-        $(span).attr("id", el);
-        $(span).top = `${Math.floor(Math.random() * maxPositionY)}px`;
-        $(span).left = `${Math.floor(Math.random() * maxPositionX)}px`;
-        container.append($(span));
-        console.log($(span));
+        const spans = $(span).addClass("word").attr("id", el);
+        spans.css("top", `${Math.floor(Math.random() * maxPositionY)}px`);
+        spans.css("left", `${Math.floor(Math.random() * maxPositionX)}px`);
+        container.append($(spans));
+        console.log($(spans));
       });
     }
+
+    input.on("change", function () {
+      const word = $(`#${input.val()}`);
+      console.log(word);
+    });
 
     init();
   </script>
