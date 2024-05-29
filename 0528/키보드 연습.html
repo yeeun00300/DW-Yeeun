@@ -126,7 +126,7 @@
           $(el).css("top", `${wordsTop}px`);
           const wordsBottom = $(el).offset().top + $(el).height();
           const inputTop = input.offset().top;
-          if (wordsBottom == inputTop) {
+          if (wordsBottom > inputTop) {
             $(el).remove();
           }
         });
