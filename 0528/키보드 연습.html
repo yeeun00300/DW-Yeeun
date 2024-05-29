@@ -97,8 +97,43 @@
     input.on("change", function () {
       const word = $(`#${input.val()}`);
       console.log(word);
+      if (input.val() == word.text()) {
+        word.remove();
+        score = score + 100;
+        scorePanel.text(`총점 : ${score}`);
+        count++;
+        if (count == words.length) {
+          alert("clear!");
+          if (confirm("재도전하시겠습니까?")) {
+            window.location.reload();
+          }
+        }
+      }
+      input.val("");
     });
 
+    function wordRain() {
+      const words = $(".word");
+      console.log(words);
+      console.log(container.offset().top);
+      console.log(container.height());
+      console.log($(words[0]).offset().top);
+      console.log($(words[0]).height());
+      console.log(input.offset().top);
+      setInterval(function () {
+        words.each(function (i, el) {
+          const wordsTop = $(el).offset().top + container.offset().top / 100;
+          $(el).css("top", `${wordsTop}px`);
+          const wordsBottom = $(el).offset().top + $(el).height();
+          const inputTop = input.offset().top;
+          if (wordsBottom == inputTop) {
+            $(el).remove();
+          }
+        });
+      }, 1000);
+    }
+
     init();
+    wordRain();
   </script>
 </html>
