@@ -29,12 +29,16 @@
     // response.formData() : 응답을 읽고 FormData 객체 형태로 반환한다.
     // response.blob() : 응답을 Blob(바이너리 데이터) 형태로 반환한다.
 
-    console.log("Start!!!");
     fetch(url)
-      // .then((response) => response.json())
-      .then((response) => response.text())
-      .then((result) => console.log(JSON.parse(result)));
-    console.log("End!!!");
+      .then((response) => response.json())
+      .then((result) => console.log(result));
+
+    // console.log("Start!!!");
+    // fetch(url)
+    //   // .then((response) => response.json())
+    //   .then((response) => response.text())
+    //   .then((result) => console.log(JSON.parse(result)));
+    // console.log("End!!!");
 
     // Start 콘솔이 먼저 찍힘
     // fetch 를 만났는데 여기서 리턴하는 Promise의 then 함수로 콜백을 등록
