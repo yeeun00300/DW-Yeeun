@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>파이어베이스 연습</title>
   </head>
+  <style>
+    tr {
+      cursor: pointer;
+      height: 50px;
+    }
+    .selected {
+      background-color: yellow;
+    }
+  </style>
   <body>
     <form name="joinForm">
       <p>
@@ -30,7 +39,26 @@
     </form>
     <button id="saveBtn">데이터 저장</button>
 
-    <table border="1">
+    <table border="1"></table>
+    <br /><br />
+    <button id="updateBtn">회원정보수정</button>
+    <button id="saveUpdateBtn">회원정보저장</button>
+    <button id="deleteBtn">회원삭제</button>
+  </body>
+  <script type="module">
+    import {
+      db,
+      getDatas,
+      addDatas,
+      deleteDatas,
+      updateDatas,
+    } from "../resources/js/firebase.js";
+    async function getMembers() {
+      console.log("getMembers 함수 시작");
+      const snapshot = await getDatas("member");
+      //보통은 이 부분을 함수로 감싸줌
+      const tableTag = document.querySelector("table");
+      let tagStr = `
       <tr>
         <th>이름</th>
         <th>나이</th>
@@ -38,26 +66,129 @@
         <th>이메일</th>
         <th>전화번호</th>
       </tr>
-    </table>
-  </body>
-  <script type="module">
-    import { db, getDatas, addDatas } from "../resources/js/firebase.js";
-    const snapshot = await getDatas("member");
+      `;
+      snapshot.forEach((doc) => {
+        const { name, age, gender, email, tel } = doc.data();
+        // tableTag.insertAdjacentHTML(
+        //   "beforeend",
+        //   `<tr>
+        //   <td>${name}</td>
+        //   <td>${age}</td>
+        //   <td>${gender}</td>
+        //   <td>${email}</td>
+        //   <td>${tel}</td>
+        // </tr>`
+        // );
+        tagStr += `
+        <tr>
+          <td class="name">${name}</td>
+          <td class="age">${age}</td>
+          <td class="gender">${gender}</td>
+          <td class="email">${email}</td>
+          <td class="tel">${tel}</td>
+          <input type='hidden' value='${doc.id}'/>
+        </tr>
+        `;
+      });
+      tableTag.innerHTML = tagStr;
+      console.log("getMembers 함수 종료");
+    }
+    // 멤버 조회 및 이벤트 핸들러 등록하는함수
 
-    //보통은 이 부분을 함수로 감싸줌
-    const tableTag = document.querySelector("table");
-    snapshot.forEach((doc) => {
-      const { name, age, gender, email, tel } = doc.data();
-      tableTag.insertAdjacentHTML(
-        "beforeend",
-        `<tr>
-        <td>${name}</td>
-        <td>${age}</td>
-        <td>${gender}</td>
-        <td>${email}</td>
-        <td>${tel}</td>
-      </tr>`
+    function getMembersHandleTrClick() {
+      // handleTrClick();
+      getMembers().then(handleTrClick);
+    }
+    getMembersHandleTrClick();
+
+    function handleTrClick() {
+      console.log("handleTrClick 이벤트 시작");
+      //tr 태그에 click 이벤트 적용
+      const trs = document.querySelectorAll("tr");
+      trs.forEach((tr) => {
+        tr.addEventListener("click", (e) => {
+          // console.log(e.target);
+          // e.target 으로 적으면 선택한부분만 색 변함
+          if (e.target.tagName != "TH") tr.classList.toggle("selected");
+          // th 는 색 안변하게 하려고
+        });
+      });
+      console.log("handleTrClick 이벤트 종료");
+    }
+
+    const deleteBtn = document.getElementById("deleteBtn");
+    deleteBtn.addEventListener("click", function () {
+      // 반복문 쓸때는 nodeList 로 쓰기
+      const selectedTrs = document.querySelectorAll("tr.selected");
+      if (selectedTrs.length == 0) {
+        alert("삭제할 데이터가 없습니다.");
+        return false;
+      }
+
+      // 문서 id 가져오기
+      selectedTrs.forEach((tr) => {
+        const docId = tr.lastElementChild.value;
+        deleteDatas("member", docId);
+      });
+      getMembersHandleTrClick();
+    });
+
+    const updateBtn = document.getElementById("updateBtn");
+    updateBtn.addEventListener("click", function () {
+      const selectedTrs = document.querySelectorAll("tr.selected");
+      if (selectedTrs.length == 0) {
+        alert("수정할 회원을 선택해주세요.");
+        return false;
+      } else if (selectedTrs.length >= 2) {
+        alert("회원정보 수정은 하나씩만 가능합니다.");
+        return false;
+      }
+
+      const selectedTr = selectedTrs[0];
+      const trChildren = selectedTr.children;
+      console.log(trChildren);
+      for (let i = 0; i < trChildren.length; i++) {
+        trChildren[i].addEventListener("click", (e) => {
+          e.stopPropagation();
+        });
+        const tdText = trChildren[i].innerText;
+        trChildren[i].innerHTML = `<input type='text' value='${tdText}'/>`;
+      }
+    });
+
+    const saveUpdateBtn = document.getElementById("saveUpdateBtn");
+    saveUpdateBtn.addEventListener("click", function () {
+      const selectedTr = document.querySelector("tr.selected");
+      const trChildren = selectedTr.children;
+
+      // DB의 데이터를 수정할 정보를 추출한다.
+      // HTMLCollection 을 배열로 만들어준다.
+      const trChildrenArr = Array.from(trChildren);
+      // input 요소(가장 마지막)를 따로 꺼낸다.
+      const docId = trChildrenArr.pop().value;
+      const updateObj = trChildrenArr.reduce(
+        (acc, cur) => ({
+          ...acc,
+          [cur.classList.value]: cur.firstElementChild.value,
+        }),
+        {}
       );
+      console.log(updateObj);
+
+      // 수정된 내용을 화면에 반영한다.
+      let originTrStr = "";
+      console.log(trChildren);
+      for (let i = 0; i < trChildren.length; i++) {
+        if (trChildren[i].tagName != "INPUT") {
+          originTrStr += `<td>${trChildren[i].firstElementChild.value}</td>`;
+        } else {
+          originTrStr += `<input type='hidden' value="${trChildren[i].value}"/>`;
+        }
+      }
+      selectedTr.innerHTML = originTrStr;
+      selectedTr.classList.remove("selected");
+      //파이어베이스 수정 함수 호출
+      updateDatas("member", docId, updateObj).then(getMembersHandleTrClick);
     });
 
     const btn = document.getElementById("saveBtn");
@@ -94,7 +225,7 @@
       // 결과가 실패 ==> "저장을 실패했습니다". alert
 
       const result = await addDatas("member", joinFormObj);
-      result ? window.location.reload() : alert("저장을 실패했습니다.");
+      result ? getMembersHandleTrClick() : alert("저장을 실패했습니다.");
       //참이면 window.location.reload() 말고 위에 함수 이름 실행하면 깜빡거리지 않고 실행가능
     });
 
