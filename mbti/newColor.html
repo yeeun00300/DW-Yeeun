@@ -34,6 +34,7 @@
           <input class="color-input" type="text" value="#9441FF" />
           <span
             class="color-input-chip"
+            id="colorChip"
             style="background-color: #9441ff"
           ></span>
         </div>
@@ -68,12 +69,46 @@
     const mbtiOptionNodeList = document.querySelectorAll(".mbti-option");
     mbtiOptionNodeList.forEach((option, idx) => {
       option.addEventListener("click", function () {
-        if (option.classList.has("selected")) return false;
+        if (option.classList.contains("selected")) return false;
 
+        let versusEl;
         if (idx % 2 == 0) {
+          versusEl = this.nextElementSibling;
         } else {
+          versusEl = this.previousElementSibling;
         }
+        // versusEl =
+        //   idx % 2 == 0 ? this.nextElementSibling : this.previousElementSibling;
+        if (versusEl.classList.contains("selected")) {
+          versusEl.classList.remove("selected");
+        }
+        this.classList.add("selected");
       });
+    });
+
+    const colorInput = document.querySelector(".color-input");
+    const colorChip = document.getElementById("colorChip");
+    colorInput.addEventListener("change", function () {
+      const colorVal = colorInput.value;
+      if (colorVal.length == 7) {
+        colorChip.style.backgroundColor = colorVal;
+      } else {
+        alert("색상 코드는 #을 포함한 HEX 형태로 작성해야합니다.");
+      }
+    });
+
+    const randomBtn = document.querySelector(".random");
+    randomBtn.addEventListener("click", function () {
+      const colorArr = [];
+      for (let i = 0; i < 3; i++) {
+        colorArr.push(parseInt(Math.random() * 256));
+      }
+      const hexColorCode = colorArr
+        .map((rgb) => rgb.toString(16).padStart(2, "0"))
+        .join("");
+      colorInput.value = `#${hexColorCode.toUpperCase()}`;
+      colorChip.style.backgroundColor = `#${hexColorCode}`;
+      //   colorArr[0].toString(16).padStart(2, '0');
     });
   </script>
 </html>
