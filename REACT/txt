@@ -1,0 +1,13 @@
+node.js 설치
+버전확인 후 설치
+vs code  ctrl+` 눌러서 node -v 해보고 적용되는지 확인
+cd react
+npm install
+버그나면 npm install -g npx
+
+만들때 npx create-react-app 파일명
+cd 파일명 치고 npm run start
+이후로는 터미널 새로 써야함 -> ctrl+shift+`
+종료하고싶으면 ctrl + c -> 실행하고 있는 터미널에서 쓰기
+
+자동완성 rsf
