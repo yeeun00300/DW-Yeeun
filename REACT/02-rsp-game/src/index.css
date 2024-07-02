@@ -1,4 +1,6 @@
+* {
+  box-sizing: border-box;
+}
 body {
   background-color: rgb(156, 218, 230);
-  color: #fff;
 }
