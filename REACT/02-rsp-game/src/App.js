@@ -79,13 +79,13 @@ function App() {
         {/* 가위바위보 내는곳 */}
         <div className="App-hands">
           <div
-            className={`Hand ${isWin == 0 ? "" : isWin == 1 ? "winner" : ""}`}
+            className={`Hand ${isWin === 0 ? "" : isWin === 1 ? "winner" : ""}`}
           >
             <HandIcon value={hand} className="Hand-icon" />
           </div>
           <div className="App-versus">VS</div>
           <div
-            className={`Hand ${isWin == 0 ? "" : isWin == 1 ? "" : "winner"}`}
+            className={`Hand ${isWin === 0 ? "" : isWin === 1 ? "" : "winner"}`}
           >
             <HandIcon value={otherHand} className="Hand-icon" />
           </div>
