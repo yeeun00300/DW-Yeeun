@@ -10,7 +10,7 @@ function Rating(props) {
     <div>
       {RATINGS.map((arrNum) => (
         <Star key={arrNum} />
-        // 반복문에서는 항상 key prop 넣어줘야함
+        // 컴포넌트 반복문에서는 항상 key prop 넣어줘야함
       ))}
     </div>
   );
