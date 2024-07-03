@@ -4,6 +4,42 @@
   display: flex;
   flex-direction: column;
 }
+.App input,
+.App textarea {
+  padding: 15px 20px;
+  border: 1px solid #f9f9f9;
+  border-radius: 6px;
+  outline: none;
+  font-size: 16px;
+  background-color: #f9f9f9;
+  font-family: sans-serif;
+}
+.App input::placeholder,
+.App textarea::placeholder {
+  color: #bdbdbd;
+}
+.App input:focus,
+.App textarea:focus {
+  border: 1px solid #d1d1d1;
+}
+.App-sorts {
+  margin: 51px 0 23px;
+  display: flex;
+  gap: 30px;
+}
+.AppSortButton {
+  padding: 12px 40px;
+  border: none;
+  color: #000;
+  font-weight: 600;
+  font-size: 18px;
+  background-color: transparent;
+}
+.AppSortButton.selected {
+  border-radius: 10px;
+  color: white;
+  background-color: #000;
+}
 .App .App-nav,
 .App .App-footer {
   flex: none;
@@ -42,6 +78,22 @@
   filter: drop-shadow(0 0 11px rgba(105, 105, 105, 0.2));
   /* drop-shadow ->> 이미지 모양 기준으로 그림자생김 */
   /* box-shadow 는 요소의 크기 기준으로 그림자가 생김 */
+}
+
+.App-ReviewList {
+  padding: 30px 30px 0;
+  border-radius: 5px;
+  box-shadow: 0 0 11px rgba(105, 105, 105, 0.2);
+  background-color: #fff;
+}
+
+.App-load-more-button {
+  width: 100%;
+  padding: 25px 0;
+  font-size: 16px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
 }
 
 .App-footer {

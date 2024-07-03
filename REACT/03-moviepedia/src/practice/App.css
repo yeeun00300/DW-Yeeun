@@ -1,0 +1,49 @@
+.App {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/***** nav 영역 css ******/
+.App .App-nav,
+.App .App-footer {
+  flex: none;
+}
+.App .App-container {
+  flex: 1 1;
+}
+.App-nav {
+  height: 65px;
+  background-color: #fff;
+  border-bottom: 1px solid #e2e2e2;
+}
+.App-nav-container,
+.App-container,
+.App-footer-container {
+  width: 100%;
+  max-width: 860px;
+  margin: auto;
+}
+.App-nav-container {
+  display: flex;
+  height: 100%;
+  align-items: center;
+}
+
+/****** 컨테이너 영역 css ******/
+.App-container {
+  padding: 50px 21px;
+}
+
+/**** footer 영역 css *****/
+.App-footer {
+  background-color: #000;
+}
+.App-footer-container {
+  padding: 30px 21px;
+  font-size: 14px;
+  letter-spacing: -0.25px;
+  text-align: right;
+  color: #838388;
+}
