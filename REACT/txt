@@ -11,3 +11,6 @@ cd 파일명 치고 npm run start
 종료하고싶으면 ctrl + c -> 실행하고 있는 터미널에서 쓰기
 
 자동완성 rsf
+
+firebase 설치하려면 프로젝트 파일에 npm install firebase
+이후 package.json  "firebase": "^10.6.0" 으로 버전 바꿔주기
