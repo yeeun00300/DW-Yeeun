@@ -35,6 +35,15 @@
 .App-container {
   padding: 50px 21px;
 }
+.App-ReviewForm {
+  padding: 30px;
+  background-image: url(../assets/ticket.png);
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: cover;
+  border-radius: 5px;
+  filter: drop-shadow(0 0 11px rgba(105, 105, 105, 0.2));
+}
 
 /**** footer 영역 css *****/
 .App-footer {

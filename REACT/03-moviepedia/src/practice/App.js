@@ -2,6 +2,7 @@ import React from "react";
 import logoImg from "../assets/logo.png";
 import "./App.css";
 import ReviewForm from "./ReviewForm";
+import State from "./State";
 
 function App(props) {
   return (
@@ -27,6 +28,7 @@ function App(props) {
       </footer>
     </div>
   );
+  // return <State />;
 }
 
 export default App;
