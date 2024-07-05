@@ -3,7 +3,13 @@ import "./App.css";
 import ReviewForm from "./ReviewForm";
 import ReviewList from "./ReviewList";
 import logoImg from "./assets/logo.png";
-import { getDatas, getDatasByOrder, getDatasByOrderLimit } from "./firebase";
+import {
+  addDatas,
+  deleteDatas,
+  getDatas,
+  getDatasByOrder,
+  getDatasByOrderLimit,
+} from "./firebase";
 import { useEffect, useState } from "react";
 
 const LIMIT = 5;
@@ -53,13 +59,40 @@ function App() {
     setOrder("rating");
   };
 
-  // 화면이 최초 랜더링 됐을때만 실행하는 함수([]에 아무것도 없을때) , [상태] 상태가 변경되면 함수 재실행
+  // useEffect ==> 1. 최초 랜더링시, 2. 디펜던시 리스트에 들어있는 값이 변경될때, 3. 컴포넌트가 화면에서 사라질때
+  // 화면이 최초 랜더링 됐을때 실행하는 함수 , [상태] 상태가 있을때 상태가 변경되면 함수 재실행
   // [] --> 디펜던시 리스트..? 안에 있는것이 변경되면 함수 재실행 여러개 들어갔을때 하나만 변해도 재실행함
   // 그러므로 useEffect 함수는 여러개 써도됨
   // useEffect 함수 안 실행코드가 같다면 [] 안에는 여러개 써도 됨 여러번 쓸때는 [] 안의 각각의 실행코드가 다를때
 
   const handleMoreClick = () => {
     handleLoad({ order: order, limit: LIMIT, lq: lq });
+  };
+
+  const handleAddSuccess = (data) => {
+    setItems((prevItems) => [data, ...prevItems]);
+  };
+
+  const handleDelete = async (docId, imgUrl) => {
+    // 1. 파이어베이스에 접근해서 imgUrl 을 사용해 스토리지에 있는 사진파일 삭제
+
+    // 2. docId 를 사용해 문서 삭제
+    const result = await deleteDatas("movie", docId, imgUrl);
+    // db 에서 삭제를 성공했을 때만 그 결과를 화면에 반영한다.
+    if (!result) {
+      alert("저장된 이미지 파일이 없습니다. \n 관리자에게 문의하세요.");
+      return false;
+    }
+
+    // 3. items 에서 docId 가 같은 요소 (객체)를 찾아서 제거
+
+    // setItems((prevItems) => {
+    //   const filteredArr = prevItems.filter((item) => {
+    //     return item.docId !== docId;
+    //   });
+    //   return filteredArr;
+    // });
+    setItems((prevItems) => prevItems.filter((item) => item.docId !== docId));
   };
 
   useEffect(() => {
@@ -80,7 +113,7 @@ function App() {
       </nav>
       <div className="App-container">
         <div className="App-ReviewForm">
-          <ReviewForm />
+          <ReviewForm addData={addDatas} handleAddSuccess={handleAddSuccess} />
         </div>
         <div className="App-sorts">
           <AppSortButton
@@ -98,7 +131,7 @@ function App() {
           </AppSortButton>
         </div>
         <div className="App-ReviewList">
-          <ReviewList items={items} />
+          <ReviewList items={items} handleDelete={handleDelete} />
           {/* {hasNext && (
             <button className="App-load-more-button" onClick={handleMoreClick}>
               더보기

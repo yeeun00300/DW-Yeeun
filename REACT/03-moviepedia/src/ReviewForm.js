@@ -3,8 +3,16 @@ import FileInput from "./FileInput";
 import RatingInput from "./RatingInput";
 import "./ReviewForm.css";
 
-function ReviewForm(props) {
+const INITIAL_VALUE = {
+  title: "",
+  rating: 0,
+  content: "",
+  imgUrl: null,
+};
+
+function ReviewForm({ addData, handleAddSuccess }) {
   const [values, setValues] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (name, value) => {
     setValues((prevValues) => ({ ...prevValues, [name]: value }));
@@ -15,11 +23,22 @@ function ReviewForm(props) {
     // 함수 나눈 이유--> input type ="file" 은 value 못씀
     console.log(values);
   };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
+    // 버튼 비활성화
+    setIsSubmitting(true);
+    const result = await addData("movie", values);
+    handleAddSuccess(result);
+
+    // 버튼 활성화
+    setIsSubmitting(false);
+    setValues(INITIAL_VALUE);
+  };
   return (
-    <form className="ReviewForm">
+    <form className="ReviewForm" onSubmit={handleSubmit}>
       <div>
-        <FileInput name="imgUrl" setFile={handleChange} />
+        <FileInput name="imgUrl" setFile={handleChange} value={values.imgUrl} />
         {/* name="" 컴포넌트에 써준 이유--> values 한 페이지에서 보려고! 효율성 높아짐 */}
       </div>
       <div className="Form-container">
@@ -29,13 +48,19 @@ function ReviewForm(props) {
           placeholder="제목을 입력해주세요."
           onChange={handleInputChange}
         />
-        <RatingInput />
+        <RatingInput
+          name="rating"
+          setRating={handleChange}
+          value={values.rating}
+        />
         <textarea
           name="content"
           placeholder="내용을 입력해주세요."
           onChange={handleInputChange}
         />
-        <button>확인</button>
+        <button type="submit" disabled={isSubmitting}>
+          확인
+        </button>
       </div>
     </form>
   );
