@@ -9,13 +9,16 @@ import {
   getDatas,
   getDatasByOrder,
   getDatasByOrderLimit,
+  updateDatas,
 } from "./firebase";
 import { useEffect, useState } from "react";
+import LocaleSelect from "./LocaleSelect";
+import useTranslate from "./hooks/useTranslate";
 
 const LIMIT = 5;
 
 function AppSortButton({ children, onClick, selected }) {
-  let isSelected;
+  let isSelected = "";
   if (selected) {
     isSelected = "selected";
   }
@@ -73,6 +76,18 @@ function App() {
     setItems((prevItems) => [data, ...prevItems]);
   };
 
+  const handleUpdateSuccess = (result) => {
+    // 화면처리... 기존 데이터는 items 에서 삭제, 수정된 데이터는 items의 기존 위치에 추가
+    setItems((prevItems) => {
+      const splitIdx = prevItems.findIndex((item) => item.id === result.id);
+      return [
+        ...prevItems.slice(0, splitIdx),
+        result,
+        ...prevItems.slice(splitIdx + 1),
+      ];
+    });
+  };
+
   const handleDelete = async (docId, imgUrl) => {
     // 1. 파이어베이스에 접근해서 imgUrl 을 사용해 스토리지에 있는 사진파일 삭제
 
@@ -95,6 +110,8 @@ function App() {
     setItems((prevItems) => prevItems.filter((item) => item.docId !== docId));
   };
 
+  const t = useTranslate();
+
   useEffect(() => {
     handleLoad({ order: order, limit: LIMIT });
     setHasNext(true);
@@ -105,33 +122,38 @@ function App() {
       <nav className="App-nav">
         <div className="App-nav-container">
           <img className="App-logo" src={logoImg} alt="" />
-          <select>
-            <option>한국어</option>
-            <option>English</option>
-          </select>
+          <LocaleSelect />
         </div>
       </nav>
       <div className="App-container">
         <div className="App-ReviewForm">
-          <ReviewForm addData={addDatas} handleAddSuccess={handleAddSuccess} />
+          <ReviewForm
+            onSubmit={addDatas}
+            handleSubmitSuccess={handleAddSuccess}
+          />
         </div>
         <div className="App-sorts">
           <AppSortButton
             selected={order === "createdAt"}
             onClick={handleNewestClick}
           >
-            최신순
+            {t(`newest`)}
           </AppSortButton>
           <AppSortButton
             selected={order === "rating"}
             //selected 에는 true,false만 담김
             onClick={handleBestClick}
           >
-            베스트순
+            {t(`best`)}
           </AppSortButton>
         </div>
         <div className="App-ReviewList">
-          <ReviewList items={items} handleDelete={handleDelete} />
+          <ReviewList
+            items={items}
+            handleDelete={handleDelete}
+            onUpdate={updateDatas}
+            onUpdateSuccess={handleUpdateSuccess}
+          />
           {/* {hasNext && (
             <button className="App-load-more-button" onClick={handleMoreClick}>
               더보기
@@ -142,12 +164,12 @@ function App() {
             onClick={handleMoreClick}
             disabled={!hasNext}
           >
-            더보기
+            {t("load more")}
           </button>
         </div>
       </div>
       <footer className="App-footer">
-        <div className="App-footer-container">| 개인정보 처리방침</div>
+        <div className="App-footer-container">| {t("privacy policy")}</div>
       </footer>
     </div>
   );
