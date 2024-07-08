@@ -17,6 +17,9 @@ function App() {
   useEffect(() => {
     console.log("나는 count가 변경될 때 실행되는 uef야");
   }, [count]);
+  useEffect(() => {
+    console.log("나는 value가 변경될 때 실행되는 uef야");
+  }, [value]);
   return (
     <div className="App">
       <input type="text" placeholder="Search here" onChange={inputChange} />
