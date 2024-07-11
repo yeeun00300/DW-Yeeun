@@ -14,3 +14,7 @@ cd 파일명 치고 npm run start
 
 firebase 설치하려면 프로젝트 파일에 npm install firebase
 이후 package.json  "firebase": "^10.6.0" 으로 버전 바꿔주기
+
+npm install react-router-dom --save
+
+npm install styled-components
