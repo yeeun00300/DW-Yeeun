@@ -18,3 +18,5 @@ firebase 설치하려면 프로젝트 파일에 npm install firebase
 npm install react-router-dom --save
 
 npm install styled-components
+npm install styled-reset
+npm install classnames -->클래스 프로퍼티 여러개 적용할때 쓰는 확장

@@ -1,12 +1,11 @@
 import React from "react";
 import "./Movie.css";
-import img from "./assets/11.jpg";
 
 function Movie({ movie }) {
   const { title, year, medium_cover_image, genres, summary } = movie;
   return (
     <div className="movie">
-      <img className="movie-img" src={medium_cover_image} />
+      <img className="movie-img" src={medium_cover_image} alt="" />
       <div>
         <h2 className="movie-title">
           <span>{title}</span>
