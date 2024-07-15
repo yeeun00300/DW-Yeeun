@@ -26,11 +26,11 @@ const ToggleWrapper = styled.button`
     0 2px 4px rgba(40, 40, 40, 1)`};
 `;
 
-function ThemToggle({ mode, toggleTheme }) {
+function ThemToggle({ mode, onClick }) {
   //로컬스토리지에 themeMode 저장
   localStorage.setItem("theme", mode);
   const handleClick = () => {
-    toggleTheme();
+    onClick();
   };
 
   return (

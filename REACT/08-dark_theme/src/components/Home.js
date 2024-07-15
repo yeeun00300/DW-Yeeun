@@ -14,7 +14,7 @@ function Home(props) {
       <div className={styles.body}>
         <Outlet />
       </div>
-      <ThemToggle mode={themMode} toggleTheme={toggleTheme} />
+      <ThemToggle mode={themMode} onClick={toggleTheme} />
     </div>
   );
 }

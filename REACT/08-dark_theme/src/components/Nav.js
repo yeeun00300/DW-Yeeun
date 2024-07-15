@@ -3,12 +3,13 @@ import Container from "./Container";
 import { Link } from "react-router-dom";
 import styles from "./Nav.module.css";
 import { useTheme } from "../context/ThemeContext";
+import cn from "classnames";
 
 function Nav({ className }) {
   const [themeMode] = useTheme();
   const menuClass = `${styles.menu} ${themeMode === "dark" ? styles.dark : ""}`;
   return (
-    <div className={styles.nav}>
+    <div className={cn(styles.nav, menuClass)}>
       <Container className={styles.container}>
         <Link to="/">
           <div className={styles.logo}>
