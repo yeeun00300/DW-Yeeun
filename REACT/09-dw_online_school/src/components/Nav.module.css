@@ -4,19 +4,16 @@
   box-shadow: var(--box-shadow);
   background-color: white;
 }
-.nav.dark {
-  box-shadow: 0 5px 10px rgba(40, 40, 40, 1), 0 2px 4px rgba(40, 40, 40, 1);
-}
 .container {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 .logo {
-  font-family: "Cafe24Ssurround";
-  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff")
-    format("woff");
-  font-weight: normal;
+  font-family: "TheJamsil5Bold";
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/TheJamsil5Bold.woff2")
+    format("woff2");
+  font-weight: 700;
   font-style: normal;
   font-size: 20px;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
@@ -32,7 +29,7 @@ ul.menu {
   align-items: center;
   padding: 0;
   margin: 0;
-  list-style-type: none;
+  list-style: none;
   gap: 30px;
 }
 ul.menu.dark a,

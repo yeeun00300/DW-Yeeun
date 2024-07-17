@@ -27,10 +27,10 @@
   justify-content: space-between;
 }
 .logo {
-  font-family: "Cafe24Ssurround";
-  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff")
-    format("woff");
-  font-weight: normal;
+  font-family: "TheJamsil5Bold";
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/TheJamsil5Bold.woff2")
+    format("woff2");
+  font-weight: 700;
   font-style: normal;
   font-size: 20px;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
