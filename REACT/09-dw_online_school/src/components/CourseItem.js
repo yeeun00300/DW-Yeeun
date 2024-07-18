@@ -8,8 +8,7 @@ import getCourseColor from "../utils/getCourseColor";
 const DIFFICULTY = ["입문", "초급", "중급", "상급"];
 
 function CourseItem({ Data }) {
-  const { title, summary, language, difficulty, code } = Data;
-
+  const { title, summary, language, difficulty, code, photoUrl, slug } = Data;
   const courseColor = getCourseColor(code);
   const thumbStyle = {
     borderColor: courseColor,
@@ -17,11 +16,13 @@ function CourseItem({ Data }) {
   return (
     <Card className={styles.courseItem}>
       <div className={styles.thumb} style={thumbStyle}>
-        <CourseIcon photoUrl={Data.photoUrl} />
+        <CourseIcon photoUrl={photoUrl} />
       </div>
       <div className={styles.content}>
         <h2 className={styles.title}>
-          <Link>{title}</Link>
+          <Link to={`/courses/${slug}`} state={{ Data }}>
+            {title}
+          </Link>
         </h2>
         <p className={styles.description}>{summary}</p>
         <div>
