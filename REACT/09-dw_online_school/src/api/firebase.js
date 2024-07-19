@@ -1,9 +1,13 @@
 import { initializeApp } from "firebase/app";
 import {
+  arrayRemove,
+  arrayUnion,
   collection,
+  doc,
   getDocs,
   getFirestore,
   query,
+  updateDoc,
   where,
 } from "firebase/firestore";
 
@@ -68,4 +72,23 @@ async function getMember(values) {
   return { memberObj, message };
 }
 
-export { db, getDatas, getData, getMember };
+async function upDateDatas(collectionName, docId, updateObj, option) {
+  // 문서의 reference 객체가 필요
+  const docRef = doc(db, collectionName, docId);
+  try {
+    if (!option) {
+      await updateDoc(docRef, updateObj);
+    } else {
+      if (option.type == "ADD") {
+        await updateDoc(docRef, { [option.fieldName]: arrayUnion(updateObj) });
+      } else if (option.type == "DELETE") {
+        await updateDoc(docRef, { [option.fieldName]: arrayRemove(updateObj) });
+      }
+    }
+    return true;
+  } catch (error) {
+    return false;
+  }
+}
+
+export { db, getDatas, getData, getMember, upDateDatas };
