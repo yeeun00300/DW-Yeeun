@@ -1,0 +1,20 @@
+.writer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.writer .info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.writer .name {
+  font-size: 14px;
+  font-weight: 500;
+  color: #494949;
+}
+.writer .level {
+  color: #c4c4c4;
+  font-size: 12px;
+  font-weight: 500;
+}
