@@ -86,4 +86,44 @@ async function getLastNum(collectionName, field) {
   return lastId;
 }
 
-export { addDatas };
+async function getDatasOrderByLimit(collectionName, options) {
+  // const { fieldName, limits } = options;
+  // const q = query(
+  //   getCollection(collectionName),
+  //   orderBy(fieldName, "desc"),
+  //   limit(limits)
+  // );
+  // const snapshot = await getDocs(q);
+  // const resultData = snapshot.docs.map((doc) => ({
+  //   ...doc.data(),
+  //   docId: doc.id,
+  // }));
+  // return resultData;
+
+  const collect = await collection(db, collectionName);
+  //  query(컬렉션 정보, 조건1, 조건2, 조건3...)
+  let q;
+  if (options.lq) {
+    q = query(
+      collect,
+      orderBy(options.order, "desc"),
+      startAfter(options.lq),
+      limit(options.limit)
+    );
+  } else {
+    q = query(collect, orderBy(options.order, "desc"), limit(options.limit));
+  }
+
+  // asc 오름차순 (A,B,C)--> 기본값, desc 내림차순(C,B,A)
+  const snapshot = await getDocs(q);
+  const lastQuery = snapshot.docs[snapshot.docs.length - 1];
+  console.log(lastQuery);
+  const resultData = snapshot.docs.map((doc) => ({
+    docId: doc.id,
+    ...doc.data(),
+  }));
+  return { resultData, lastQuery };
+  // 키값을 써주지않으면 value가 key 이자 value가 됨
+}
+
+export { addDatas, getDatasOrderByLimit };
