@@ -60,7 +60,7 @@ function App() {
   };
 
   useEffect(() => {
-    handleLoad({ order: order, limit: LIMIT, lq: lq });
+    handleLoad({ order: order, limit: LIMIT, lq: undefined });
     setHasNext(true);
   }, [order]);
 
