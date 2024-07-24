@@ -5,6 +5,14 @@ import logoTextImg from "../assets/logo-text.png";
 import FoodForm from "./FoodForm";
 import searchImg from "../assets/ic-search.png";
 
+function AppSortButton({ children, selected }) {
+  return (
+    <button className={`AppSortButton ${selected ? "selected" : ""}`}>
+      {children}
+    </button>
+  );
+}
+
 function App() {
   return (
     <div className="App" style={{ backgroundImage: `url(${backgroundImg})` }}>
@@ -22,6 +30,10 @@ function App() {
               <img src={searchImg} />
             </button>
           </form>
+          <div className="App-orders">
+            <AppSortButton selected={true}>최신순</AppSortButton>
+            <AppSortButton>칼로리순</AppSortButton>
+          </div>
         </div>
         {/* <FoodList /> */}
         <button>더 보기</button>
