@@ -25,9 +25,9 @@ function FoodForm({
   handleSubmitSuccess,
   initialPreview,
   initialValues = INITIAL_VALUES,
-  handleCancel,
+  onCancel,
 }) {
-  const [values, setValues] = useState(INITIAL_VALUES);
+  const [values, setValues] = useState(initialValues);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (name, value) => {
@@ -52,6 +52,7 @@ function FoodForm({
         onChange={handleChange}
         name="imgUrl"
         value={values.imgUrl}
+        initialPreview={initialPreview}
       />
       <div className="FoodForm-rows">
         <div className="FoodForm-title-calorie">
@@ -70,7 +71,20 @@ function FoodForm({
             name="calorie"
             value={values.calorie}
           />
-          <button className="FoodForm-submit-button" type="submit">
+          {onCancel && (
+            <button
+              className="FoodForm-cancel-button"
+              type="button"
+              onClick={() => onCancel(null)}
+            >
+              취소
+            </button>
+          )}
+          <button
+            className="FoodForm-submit-button"
+            type="submit"
+            disabled={isSubmitting}
+          >
             확인
           </button>
         </div>
