@@ -66,11 +66,12 @@ function App() {
   const handleUpdateSuccess = (resultData) => {
     console.log("확인용");
     setItems((prevItems) => {
+      // 수정된 item index 찾기
       const splitIdx = prevItems.findIndex((item) => item.id === resultData.id);
       return [
-        ...prevItems.slice(0, splitIdx),
+        ...prevItems.slice(0, splitIdx), // 첫번째꺼부터 splitIdx 전까지
         resultData,
-        ...prevItems.slice(splitIdx + 1),
+        ...prevItems.slice(splitIdx + 1), // 파라미터 1개만 쓰면 splitIdx 이후로 끝까지
       ];
     });
   };
@@ -105,8 +106,11 @@ function App() {
   const handleFindSubmit = async (e) => {
     e.preventDefault();
     const result = await getDatas("foodlist");
-    console.log(result);
-    setItems(result.filter((item) => item.title.includes(inputValue)));
+    if (inputValue === "") {
+      handleLoad({ order: order, limit: LIMIT, lq: undefined });
+    } else {
+      setItems(result.filter((item) => item.title.includes(inputValue)));
+    }
   };
 
   useEffect(() => {

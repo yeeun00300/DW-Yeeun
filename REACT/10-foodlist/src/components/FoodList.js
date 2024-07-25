@@ -59,7 +59,6 @@ function FoodList({ items, onDelete, onUpdate, onUpdateSuccess }) {
             return result;
           };
           const handleEditSuccess = (resultData) => {
-            // console.log(onUpdateSuccess(resultData));
             onUpdateSuccess(resultData);
             setEditingId(null);
           };
@@ -67,7 +66,7 @@ function FoodList({ items, onDelete, onUpdate, onUpdateSuccess }) {
             <li key={item.docId}>
               <FoodForm
                 initialValues={initialValues}
-                initialPreview={imgUrl}
+                initialPreview={imgUrl} //imgUrl이 이미 문자열이기 때문에 initalPreview로 프로퍼티 전달해서 그냥씀
                 onCancel={setEditingId}
                 onSubmit={handleSubmit}
                 handleSubmitSuccess={handleEditSuccess}
