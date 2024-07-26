@@ -11,8 +11,11 @@ import {
   deleteDatas,
   getDatas,
   getDatasOrderByLimit,
+  getSearchDatas,
   updateDatas,
 } from "../api/firebase";
+import LocaleSelect from "./LocaleSelect";
+import useTranslate from "./../hooks/useTranslate";
 
 const LIMIT = 5;
 let listItems;
@@ -35,6 +38,8 @@ function App() {
   const [lq, setLq] = useState();
   const [hasNext, setHasNext] = useState(true);
   const [inputValue, setInputValue] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const [isSearching, setIsSearching] = useState(false);
 
   const handleLoad = async (options) => {
     const { resultData, lastQuery } = await getDatasOrderByLimit(
@@ -54,7 +59,14 @@ function App() {
   };
 
   const handleMoreClick = () => {
-    handleLoad({ order: order, limit: LIMIT, lq: lq });
+    // handleLoad({ order: order, limit: LIMIT, lq: lq });
+    if (isSearching) {
+      const newItems = searchResults.slice(items.length, items.length + LIMIT);
+      setItems((prevItems) => [...prevItems, ...newItems]);
+      setHasNext(searchResults.length > items.length + LIMIT);
+    } else {
+      handleLoad({ order: order, limit: LIMIT, lq: lq });
+    }
   };
 
   // foodform 확인 후처리
@@ -105,13 +117,25 @@ function App() {
   };
   const handleFindSubmit = async (e) => {
     e.preventDefault();
-    const result = await getDatas("foodlist");
+
     if (inputValue === "") {
+      setIsSearching(false);
       handleLoad({ order: order, limit: LIMIT, lq: undefined });
     } else {
-      setItems(result.filter((item) => item.title.includes(inputValue)));
+      const searchResult = await getSearchDatas("foodlist", {
+        limits: LIMIT,
+        search: inputValue,
+      });
+      console.log(searchResult);
+      setSearchResults(searchResult);
+      setItems(searchResult.slice(0, LIMIT));
+      setIsSearching(true);
+      setHasNext(searchResult.length > LIMIT);
+      setLq(undefined);
     }
   };
+
+  const t = useTranslate();
 
   useEffect(() => {
     handleLoad({ order: order, limit: LIMIT, lq: undefined });
@@ -145,13 +169,13 @@ function App() {
               selected={order === "createdAt"}
               onClick={handleNewestClick}
             >
-              최신순
+              {t(`newest`)}
             </AppSortButton>
             <AppSortButton
               selected={order === "calorie"}
               onClick={handleMostCalorieClick}
             >
-              칼로리순
+              {t(`calorie`)}
             </AppSortButton>
           </div>
         </div>
@@ -163,19 +187,20 @@ function App() {
         />
         {hasNext && (
           <button className="App-load-more-button" onClick={handleMoreClick}>
-            더 보기
+            {t("load more")}
           </button>
         )}
       </div>
       <div className="App-footer">
         <div className="App-footer-container">
           <img src={logoTextImg} />
-          <select>
+          {/* <select>
             <option>한국어</option>
             <option>English</option>
-          </select>
+          </select> */}
+          <LocaleSelect />
           <div className="App-footer-menu">
-            서비스 이용약관 | 개인정보 처리방침
+            {t(`terms of service`)} | {t(`privacy policy`)}
           </div>
         </div>
       </div>

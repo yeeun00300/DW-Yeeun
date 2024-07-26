@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import FileInput from "./FileInput";
 import "./FoodForm.css";
 import { addDatas } from "../api/firebase";
+import useTranslate from "../hooks/useTranslate";
 
 const INITIAL_VALUES = {
   title: "",
@@ -29,6 +30,8 @@ function FoodForm({
 }) {
   const [values, setValues] = useState(initialValues);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const t = useTranslate();
 
   const handleChange = (name, value) => {
     setValues((prevValues) => ({ ...prevValues, [name]: value }));
@@ -60,7 +63,7 @@ function FoodForm({
             className="FoodForm-title"
             type="text"
             onChange={handleInputChange}
-            placeholder="이름을 입력해주세요."
+            placeholder={t(`title placeholder`)}
             name="title"
             value={values.title}
           />
@@ -77,7 +80,7 @@ function FoodForm({
               type="button"
               onClick={() => onCancel(null)}
             >
-              취소
+              {t(`cancel button`)}
             </button>
           )}
           <button
@@ -85,13 +88,13 @@ function FoodForm({
             type="submit"
             disabled={isSubmitting}
           >
-            확인
+            {t(`confirm button`)}
           </button>
         </div>
         <textarea
           className="FoodForm-content"
           onChange={handleInputChange}
-          placeholder="내용을 작성해주세요."
+          placeholder={t(`content placeholder`)}
           name="content"
           value={values.content}
         />
