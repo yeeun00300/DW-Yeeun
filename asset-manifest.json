@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/DW-Yeeun/static/css/main.e1c54628.css",
-    "main.js": "/DW-Yeeun/static/js/main.12a4ceb9.js",
+    "main.js": "/DW-Yeeun/static/js/main.a4efa461.js",
     "static/media/landing.svg": "/DW-Yeeun/static/media/landing.4bbaee518e8f08af70e2809738254418.svg",
     "static/media/icon--computer-architecture.svg": "/DW-Yeeun/static/media/icon--computer-architecture.122c82b1c31a3f5fd81108ff488c239a.svg",
     "static/media/icon--deep-learning.svg": "/DW-Yeeun/static/media/icon--deep-learning.cb97e7d5d8acba83cca8be1b59b52491.svg",
@@ -36,10 +36,10 @@
     "static/media/search.svg": "/DW-Yeeun/static/media/search.8a36d7a29fe56e8c01df6f2931510f85.svg",
     "static/media/facebook.svg": "/DW-Yeeun/static/media/facebook.923e8d46d8ec99ef010f0699048cd7a4.svg",
     "main.e1c54628.css.map": "/DW-Yeeun/static/css/main.e1c54628.css.map",
-    "main.12a4ceb9.js.map": "/DW-Yeeun/static/js/main.12a4ceb9.js.map"
+    "main.a4efa461.js.map": "/DW-Yeeun/static/js/main.a4efa461.js.map"
   },
   "entrypoints": [
     "static/css/main.e1c54628.css",
-    "static/js/main.12a4ceb9.js"
+    "static/js/main.a4efa461.js"
   ]
 }
