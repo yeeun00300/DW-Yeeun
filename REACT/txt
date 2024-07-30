@@ -21,6 +21,11 @@ npm install styled-reset
 npm install classnames -->클래스 프로퍼티 여러개 적용할때 쓰는 확장
 
 react 배포하는법
+npm install gh-pages
+scipt 부분
+ "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+
 1. package.json 마지막에 ,"homepage": "https://yeeun00300.github.io/DW-Yeeun/" 작성
 2. 파일에 npm run build
 3. npm run deploy 
