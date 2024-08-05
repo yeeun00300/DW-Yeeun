@@ -31,3 +31,13 @@ scipt 부분
 3. npm run deploy 
 4. 로그인 연동 하고 배포
 <BrowserRouter basename={process.env.PUBLIC_URL}>
+
+npm install react-firebase-hooks 
+
+** redux 파일 설치 **
+npx create-react-app --template redux 파일명
+
+<이미 있는 파일에 리덕스 설치할때>
+npm i react-redux @reduxjs/toolkit
+
+공부하고싶을때 redux toolkit 검색후 api reference 보기

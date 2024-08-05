@@ -6,7 +6,7 @@ import { changeTitle } from "../util/changeTitle";
 
 function EditPage(props) {
   const { id } = useParams();
-  const diaryList = useContext(DiaryStateContext);
+  const { diaryList } = useContext(DiaryStateContext);
   const [data, setData] = useState(null);
   const navigate = useNavigate();
 

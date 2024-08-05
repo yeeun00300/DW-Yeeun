@@ -14,7 +14,7 @@ const INITIAL_VALUES = {
 };
 
 function DiaryEditor({ initialValue = INITIAL_VALUES, isEdit }) {
-  const { onCreate, onUpdate } = useContext(DiaryDispatchContext);
+  const { onCreate, onUpdate, onDelete } = useContext(DiaryDispatchContext);
   const contentRef = useRef();
   const navigate = useNavigate();
   // 1. 날짜, 감정, 텍스트 관리할 상태를 만들어야한다.
@@ -50,6 +50,12 @@ function DiaryEditor({ initialValue = INITIAL_VALUES, isEdit }) {
       navigate("/", { replace: true });
     }
   };
+  const handleDelete = () => {
+    if (window.confirm("정말 삭제하시겠습니까?")) {
+      onDelete(initialValue.docId);
+      navigate("/", { replace: true });
+    }
+  };
   useEffect(() => {
     if (isEdit) {
       //받아온 날짜 데이터(밀리세컨즈 단위)를 formatting(yyyy-mm-dd) 해주자.
@@ -61,7 +67,15 @@ function DiaryEditor({ initialValue = INITIAL_VALUES, isEdit }) {
       <Header
         headText={isEdit ? "일기 수정하기" : "새 일기 작성하기"}
         leftChild={<Button text={"< 뒤로가기"} onClick={() => navigate(-1)} />}
-        rightChild={isEdit && <Button text={"삭제하기"} type={"negative"} />}
+        rightChild={
+          isEdit && (
+            <Button
+              text={"삭제하기"}
+              type={"negative"}
+              onClick={handleDelete}
+            />
+          )
+        }
       />
       <div>
         <section>
