@@ -6,7 +6,7 @@ import { DiaryStateContext } from "../App";
 import { useSelector } from "react-redux";
 
 function HomePage(props) {
-  const { auth } = useContext(DiaryStateContext);
+  // const { auth } = useContext(DiaryStateContext);
   const diaryList = useSelector((state) => state.diary.items);
   const [curDate, setCurDate] = useState(new Date());
   const [sortedItem, setSortedItem] = useState([]);
@@ -18,7 +18,6 @@ function HomePage(props) {
   const decreaseMonth = () => {
     setCurDate(new Date(curDate.getFullYear(), curDate.getMonth() - 1));
   };
-
   useEffect(() => {
     // 1. curDate 를 활용하여 firstDay 와 lastDay 를 만들어준다.
     // new Date(2024, 8, 1, 시, 분, 초);
@@ -43,7 +42,6 @@ function HomePage(props) {
     // 4. setSortedItem 함수 사용
     setSortedItem(newItem);
   }, [curDate, diaryList]);
-
   return (
     <div>
       <Header
@@ -51,7 +49,10 @@ function HomePage(props) {
         leftChild={<Button text={"<"} onClick={decreaseMonth} />}
         rightChild={<Button text={">"} onClick={increaseMonth} />}
       />
-      <DiaryList diaryList={sortedItem} auth={auth} />
+      <DiaryList
+        diaryList={sortedItem}
+        // auth={auth}
+      />
     </div>
   );
 }

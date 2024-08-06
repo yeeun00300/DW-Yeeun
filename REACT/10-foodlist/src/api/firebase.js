@@ -36,6 +36,49 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+function getQuery(collectionName, queryOption) {
+  // {
+  //   conditions: [
+  //     {field: "", operator: "", value: ""},
+  //     {field: "", operator: "", value: ""},
+  //   ],
+  //   orderBys: [
+  //     {field: "", direction},
+  //     {field: "", direction},
+  //   ],
+  //   lastQuery: querySnapshot 객체,
+  //   limits: 10
+  // }
+  const { conditions = [], orderBys = [], limits, lastQuery } = queryOption;
+  const collect = getCollection(collectionName);
+  let q = query(collect);
+
+  const condition = [
+    { field: "text", operator: "==", value: "test" },
+    { field: "uid", operator: "==", value: "xjdiwjKDJ2jdkxJND2J" },
+  ];
+
+  // where 조건
+  conditions.forEach((condition) => {
+    q = query(q, where(condition.field, condition.operator, condition.value));
+  });
+
+  // orderBy 조건
+  orderBys.forEach((order) => {
+    q = query(q, orderBy(order.field, order.direction || "asc"));
+  });
+
+  // startAfter 조건
+  if (lastQuery) {
+    q = query(q, startAfter(lastQuery));
+  }
+
+  // limit 조건
+  q = query(q, limit(limits));
+
+  return q;
+}
+
 async function getDatas(collectionName) {
   const collect = await collection(db, collectionName);
   const snapshot = await getDocs(collect);

@@ -46,3 +46,5 @@ npm i react-redux @reduxjs/toolkit
 ; slice를 만들었으면 store에 reducer 작성. slice가 많아지는것을 대비해 key(이름) 작성
 ; useSelector 안에 state가 key와 연결
 ; dispatch 함수 useDispatch 가져와서 만들기
+; fetchItems 는 파라미터 하나밖에 못받아서 객체형식으로 전달해주기
+; dispatch()
