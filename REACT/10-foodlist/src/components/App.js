@@ -9,17 +9,14 @@ import { useEffect, useState } from "react";
 import {
   addDatas,
   deleteDatas,
-  getDatas,
   getDatasOrderByLimit,
   getSearchDatas,
   updateDatas,
 } from "../api/firebase";
 import LocaleSelect from "./LocaleSelect";
-import useTranslate from "./../hooks/useTranslate";
 import useAsync from "../hooks/useAsync";
-
-const LIMIT = 5;
-let listItems;
+import { useDispatch, useSelector } from "react-redux";
+import { fetchItems, setOrder, updateItem } from "../store/foodSlice";
 
 function AppSortButton({ children, selected, onClick }) {
   return (
@@ -33,120 +30,140 @@ function AppSortButton({ children, selected, onClick }) {
   );
 }
 
+const LIMITS = 5;
+
 function App() {
-  const [items, setItems] = useState([]);
-  const [order, setOrder] = useState("createdAt");
-  const [lq, setLq] = useState();
-  const [hasNext, setHasNext] = useState(true);
-  const [inputValue, setInputValue] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
-  const [isSearching, setIsSearching] = useState(false);
+  const dispatch = useDispatch();
+  const { items, order, lq, hasNext, isLoading } = useSelector(
+    (state) => state.food
+  );
+
+  // const [items, setItems] = useState([]);
+  // const [order, setOrder] = useState('createdAt');
+  // const [lq, setLq] = useState();
+  // const [hasNext, setHasNext] = useState(true);
+  const [search, setSearch] = useState("");
   // const [isLoading, setIsLoading] = useState(false);
-  const [isLoading, loadingError, getDatasAsync] =
-    useAsync(getDatasOrderByLimit);
+  // const [isLoading, loadingError, getDatasAsync] =
+  //   useAsync(getDatasOrderByLimit);
 
   const handleLoad = async (options) => {
-    // setIsLoading(true);
-    // const { resultData, lastQuery } = await getDatasOrderByLimit(
-    //   "foodlist",
-    //   options
-    // );
-    // setIsLoading(false);
-    const { resultData, lastQuery } = await getDatasAsync("foodlist", options);
-    listItems = resultData;
-    if (!options.lq) {
-      setItems(resultData);
-    } else {
-      setItems((prevItems) => [...prevItems, ...resultData]);
-    }
-    if (!lastQuery) {
-      setHasNext(false);
-    }
-    setLq(lastQuery);
+    dispatch(fetchItems({ collectionName: "foodlist", queryOptions: options }));
+
+    // // setIsLoading(true);
+    // // const { resultData, lastQuery } = await getDatasOrderByLimit(
+    // //   'food',
+    // //   options
+    // // );
+    // // setIsLoading(false);
+    // const { resultData, lastQuery } = await getDatasAsync('food', options);
+    // if (!options.lq) {
+    //   // setItems(resultData);
+    // } else {
+    //   // setItems((prevItems) => [...prevItems, ...resultData]);
+    // }
+    // setLq(lastQuery);
+    // if (!lastQuery) {
+    //   setHasNext(false);
+    // }
+  };
+  const handleLoadMore = async () => {
+    const queryOptions = {
+      conditions: [],
+      orderBys: [{ field: order, direction: "desc" }],
+      lastQuery: lq,
+      limits: LIMITS,
+    };
+    handleLoad(queryOptions);
   };
 
-  const handleMoreClick = () => {
-    // handleLoad({ order: order, limit: LIMIT, lq: lq });
-    if (isSearching) {
-      const newItems = searchResults.slice(items.length, items.length + LIMIT);
-      setItems((prevItems) => [...prevItems, ...newItems]);
-      setHasNext(searchResults.length > items.length + LIMIT);
-    } else {
-      handleLoad({ order: order, limit: LIMIT, lq: lq });
-    }
-  };
-
-  // foodform 확인 후처리
-  const handleAddSuccess = (resultData) => {
-    setItems((prevItems) => [resultData, ...prevItems]);
-  };
-
-  // foodlist 수정 후처리
-  const handleUpdateSuccess = (resultData) => {
-    console.log("확인용");
-    setItems((prevItems) => {
-      // 수정된 item index 찾기
-      const splitIdx = prevItems.findIndex((item) => item.id === resultData.id);
-      return [
-        ...prevItems.slice(0, splitIdx), // 첫번째꺼부터 splitIdx 전까지
-        resultData,
-        ...prevItems.slice(splitIdx + 1), // 파라미터 1개만 쓰면 splitIdx 이후로 끝까지
-      ];
-    });
-  };
-
-  const handleNewestClick = () => {
-    setOrder("createdAt");
-  };
-  const handleMostCalorieClick = () => {
-    setOrder("calorie");
-  };
+  const handleNewestClick = () => dispatch(setOrder("createdAt"));
+  const handleCalorieClick = () => dispatch(setOrder("calorie"));
 
   const handleDelete = async (docId, imgUrl) => {
-    //items 에서 docId 를 받아온다.
-    //db에서 데이터 삭제( 1. 스토리지에 있는 사진파일 삭제, 2. database 에 있는 데이터 삭제)
+    // items 에서 docId 를 받아온다.
+    // db에서 데이터 삭제(스토리지에 있는 사진파일 삭제, database에 있는 데이터 삭제)
     const { result, message } = await deleteDatas("foodlist", docId, imgUrl);
     if (!result) {
       alert(message);
       return;
     }
-    //삭제 성공시 화면에 그 결과를 반영한다.
-    setItems((prevItems) =>
-      prevItems.filter(function (item) {
-        return item.docId !== docId;
-      })
-    );
+    const queryOptions = {
+      conditions: [],
+      orderBys: [{ field: order, direction: "desc" }],
+      lastQuery: undefined,
+      limits: LIMITS,
+    };
+    handleLoad(queryOptions);
+    // 삭제 성공시 화면에 그 결과를 반영한다.
+    // setItems((prevItems) =>
+    //   prevItems.filter(function (item) {
+    //     return item.docId !== docId;
+    //   })
+    // );
   };
 
-  // 검색 함수
-  const handleKeyWordChange = (e) => {
-    setInputValue(e.target.value);
+  const handleAddSuccess = (resultData) => {
+    const queryOptions = {
+      conditions: [],
+      orderBys: [{ field: order, direction: "desc" }],
+      lastQuery: undefined,
+      limits: LIMITS,
+    };
+    handleLoad(queryOptions);
+    // setItems((prevItems) => [resultData, ...prevItems]);
   };
-  const handleFindSubmit = async (e) => {
+
+  const handleUpdate = (collectionName, docId, updateObj, imgUrl) => {
+    dispatch(updateItem({ collectionName, docId, updateObj, imgUrl }));
+  };
+
+  const handleUpdateSuccess = (result) => {
+    console.log(result);
+    // setItems((prevItems) => {
+    //   // 수정된 item의 index 찾기
+    //   const splitIdx = prevItems.findIndex(function (item) {
+    //     return item.id === result.id;
+    //   });
+    //   const beforeArr = prevItems.slice(0, splitIdx);
+    //   const afterArr = prevItems.slice(splitIdx + 1);
+    //   return [...beforeArr, result, ...afterArr];
+    //   // return [
+    //   //   ...prevItems.slice(0, splitIdx),
+    //   //   result,
+    //   //   ...prevItems.slice(splitIdx + 1)
+    //   // ]
+    // });
+  };
+
+  const handleSearchChange = (e) => {
+    setSearch(e.target.value);
+  };
+
+  const handleSearchSubmit = async (e) => {
     e.preventDefault();
-
-    if (inputValue === "") {
-      setIsSearching(false);
-      handleLoad({ order: order, limit: LIMIT, lq: undefined });
+    if (search === "") {
+      handleLoad({ fieldName: order, limits: LIMITS, lq: undefined });
     } else {
-      const searchResult = await getSearchDatas("foodlist", {
-        limits: LIMIT,
-        search: inputValue,
+      const resultData = await getSearchDatas("food", {
+        limits: LIMITS,
+        search: search,
       });
-      console.log(searchResult);
-      setSearchResults(searchResult);
-      setItems(searchResult.slice(0, LIMIT));
-      setIsSearching(true);
-      setHasNext(searchResult.length > LIMIT);
-      setLq(undefined);
+      // setItems(resultData);
     }
   };
 
-  const t = useTranslate();
-
   useEffect(() => {
-    handleLoad({ order: order, limit: LIMIT, lq: undefined });
-    setHasNext(true);
+    // handleLoad({ fieldName: order, limits: LIMITS, lq: undefined });
+    const queryOptions = {
+      conditions: [],
+      orderBys: [{ field: order, direction: "desc" }],
+      lastQuery: undefined,
+      limits: LIMITS,
+    };
+    // const collectionName = "food";
+    // dispatch(fetchItems({ collectionName: 'food', queryOptions }));
+    handleLoad(queryOptions);
   }, [order]);
 
   return (
@@ -156,17 +173,11 @@ function App() {
       </div>
       <div className="App-container">
         <div className="App-FoodForm">
-          <FoodForm
-            onSubmit={addDatas}
-            handleSubmitSuccess={handleAddSuccess}
-          />
+          <FoodForm onSubmit={addDatas} onSubmitSuccess={handleAddSuccess} />
         </div>
         <div className="App-filter">
-          <form className="App-search" onSubmit={handleFindSubmit}>
-            <input
-              className="App-search-input"
-              onChange={handleKeyWordChange}
-            />
+          <form className="App-search" onSubmit={handleSearchSubmit}>
+            <input className="App-search-input" onChange={handleSearchChange} />
             <button className="App-search-button">
               <img src={searchImg} />
             </button>
@@ -176,42 +187,39 @@ function App() {
               selected={order === "createdAt"}
               onClick={handleNewestClick}
             >
-              {t(`newest`)}
+              최신순
             </AppSortButton>
             <AppSortButton
               selected={order === "calorie"}
-              onClick={handleMostCalorieClick}
+              onClick={handleCalorieClick}
             >
-              {t(`calorie`)}
+              칼로리순
             </AppSortButton>
           </div>
         </div>
         <FoodList
           items={items}
           onDelete={handleDelete}
-          onUpdate={updateDatas}
+          // onUpdate={updateDatas}
+          onUpdate={handleUpdate}
           onUpdateSuccess={handleUpdateSuccess}
         />
         {hasNext && (
           <button
             className="App-load-more-button"
-            onClick={handleMoreClick}
+            onClick={handleLoadMore}
             disabled={isLoading}
           >
-            {t("load more")}
+            더 보기
           </button>
         )}
       </div>
       <div className="App-footer">
         <div className="App-footer-container">
           <img src={logoTextImg} />
-          {/* <select>
-            <option>한국어</option>
-            <option>English</option>
-          </select> */}
           <LocaleSelect />
           <div className="App-footer-menu">
-            {t(`terms of service`)} | {t(`privacy policy`)}
+            서비스 이용약관 | 개인정보 처리방침
           </div>
         </div>
       </div>

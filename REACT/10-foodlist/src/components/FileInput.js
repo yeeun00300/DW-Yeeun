@@ -4,8 +4,10 @@ import resetImg from "../assets/ic-reset-white.png";
 import "./FileInput.css";
 
 function FileInput({ name, value, onChange, initialPreview }) {
+  if (typeof value === "string") {
+    value = null;
+  }
   const [preview, setPreview] = useState(initialPreview);
-
   const handleChange = (e) => {
     const nextValue = e.target.files[0];
     onChange(name, nextValue);

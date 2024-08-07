@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import FileInput from "./FileInput";
 import "./FoodForm.css";
 import { addDatas } from "../api/firebase";
+import { useLocale } from "../contexts/LocaleContext";
 import useTranslate from "../hooks/useTranslate";
 import useAsync from "../hooks/useAsync";
 
@@ -24,15 +25,15 @@ function sanitize(type, value) {
 
 function FoodForm({
   onSubmit,
-  handleSubmitSuccess,
-  initialPreview,
-  initialValues = INITIAL_VALUES,
+  onSubmitSuccess,
   onCancel,
+  initialValues = INITIAL_VALUES,
+  initialPreview,
 }) {
   const [values, setValues] = useState(initialValues);
   // const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitting, submittingError, onSubmitAsync] = useAsync(onSubmit);
-
+  // const locale = useContext(LocaleContext);
   const t = useTranslate();
 
   const handleChange = (name, value) => {
@@ -45,8 +46,8 @@ function FoodForm({
   const handleSubmit = async (e) => {
     e.preventDefault();
     const resultData = await onSubmitAsync("foodlist", values);
-    handleSubmitSuccess(resultData);
     setValues(INITIAL_VALUES);
+    onSubmitSuccess(resultData);
   };
   return (
     <form className="FoodForm" onSubmit={handleSubmit}>
@@ -63,7 +64,7 @@ function FoodForm({
             className="FoodForm-title"
             type="text"
             onChange={handleInputChange}
-            placeholder={t(`title placeholder`)}
+            placeholder={t("title placeholder")}
             name="title"
             value={values.title}
           />
@@ -80,7 +81,7 @@ function FoodForm({
               type="button"
               onClick={() => onCancel(null)}
             >
-              {t(`cancel button`)}
+              취소
             </button>
           )}
           <button
@@ -88,13 +89,13 @@ function FoodForm({
             type="submit"
             disabled={isSubmitting}
           >
-            {t(`confirm button`)}
+            확인
           </button>
         </div>
         <textarea
           className="FoodForm-content"
           onChange={handleInputChange}
-          placeholder={t(`content placeholder`)}
+          placeholder="내용을 작성해주세요."
           name="content"
           value={values.content}
         />

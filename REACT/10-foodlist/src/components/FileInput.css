@@ -15,7 +15,7 @@
   object-fit: cover;
 }
 .FileInput-preview.selected {
-  opacity: 0.48;
+    opacity: 0.48;
 }
 .FileInput-hidden-overlay {
   opacity: 0;

@@ -1,12 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import diarySlice from "./diarySlice";
-import userSlice from "./userSlice";
+import foodSlice from "./foodSlice";
 
 const store = configureStore({
   reducer: {
-    diary: diarySlice.reducer,
-    user: userSlice.reducer,
+    food: foodSlice.reducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({ serializableCheck: false }),
 });
 
 export default store;

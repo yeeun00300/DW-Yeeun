@@ -92,7 +92,7 @@ body {
   position: relative;
 }
 .AppSortButton.selected::before {
-  content: "";
+  content: '';
   display: inline-block;
   position: absolute;
   left: 0;
@@ -102,7 +102,6 @@ body {
   height: 5px;
   background-color: #2c9631;
 }
-
 .App-load-more-button {
   width: 100%;
   padding: 20px;

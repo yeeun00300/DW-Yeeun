@@ -1,7 +1,6 @@
-import React, { useState } from "react";
-import "./FoodList.css";
-import FoodForm from "./FoodForm";
-import useTranslate from "../hooks/useTranslate";
+import React, { useState } from 'react';
+import './FoodList.css';
+import FoodForm from './FoodForm';
 
 function formatDate(value) {
   const date = new Date(value);
@@ -9,8 +8,7 @@ function formatDate(value) {
 }
 
 function FoodListItem({ item, onDelete, onEdit }) {
-  const { title, calorie, content, createdAt, imgUrl, docId, id } = item;
-  const t = useTranslate();
+  const { title, createdAt, content, calorie, imgUrl, docId, id } = item;
   const handleDeleteClick = () => {
     onDelete(docId, imgUrl);
   };
@@ -18,28 +16,28 @@ function FoodListItem({ item, onDelete, onEdit }) {
     onEdit(id);
   };
   return (
-    <div className="FoodListItem">
-      <img className="FoodListItem-preview" src={imgUrl} alt="" />
-      <div className="FoodListItem-rows">
-        <div className="FoodListItem-title-calorie">
-          <h1 className="FoodListItem-title">{title}</h1>
-          <span className="FoodListItem-calorie">{calorie}kcal</span>
+    <div className='FoodListItem'>
+      <img className='FoodListItem-preview' src={imgUrl} />
+      <div className='FoodListItem-rows'>
+        <div className='FoodListItem-title-calorie'>
+          <h1 className='FoodListItem-title'>{title}</h1>
+          <span className='FoodListItem-calorie'>{calorie}kcal</span>
         </div>
-        <p className="FoodListItem-content">{content}</p>
-        <div className="FoodListItem-date-buttons">
-          <p className="FoodListItem-date">{formatDate(createdAt)}</p>
-          <div className="FoodListItem-buttons">
+        <p className='FoodListItem-content'>{content}</p>
+        <div className='FoodListItem-date-buttons'>
+          <p className='FoodListItem-date'>{formatDate(createdAt)}</p>
+          <div className='FoodListItem-buttons'>
             <button
-              className="FoodListItem-edit-button"
+              className='FoodListItem-edit-button'
               onClick={handleEditClick}
             >
-              {t(`edit button`)}
+              수정
             </button>
             <button
-              className="FoodListItem-delete-button"
+              className='FoodListItem-delete-button'
               onClick={handleDeleteClick}
             >
-              {t(`delete button`)}
+              삭제
             </button>
           </div>
         </div>
@@ -51,27 +49,30 @@ function FoodListItem({ item, onDelete, onEdit }) {
 function FoodList({ items, onDelete, onUpdate, onUpdateSuccess }) {
   const [editingId, setEditingId] = useState(null);
   return (
-    <ul className="FoodList">
+    <ul className='FoodList'>
       {items.map((item) => {
         if (item.id === editingId) {
-          const { title, calorie, content, imgUrl, docId } = item;
+          const { id, title, imgUrl, calorie, content, docId } = item;
           const initialValues = { title, calorie, content, imgUrl: null };
-          const handleSubmit = (collectionName, dataObj) => {
-            const result = onUpdate(collectionName, dataObj, docId);
+
+          const handleSubmit = (collectionName, updateObj) => {
+            const result = onUpdate(collectionName, docId, updateObj, imgUrl);
             return result;
           };
-          const handleEditSuccess = (resultData) => {
-            onUpdateSuccess(resultData);
+
+          const handleSubmitSuccess = (result) => {
+            onUpdateSuccess(result);
+            // 수정 폼을 리스트로 변경
             setEditingId(null);
           };
           return (
             <li key={item.docId}>
               <FoodForm
-                initialValues={initialValues}
-                initialPreview={imgUrl} //imgUrl이 이미 문자열이기 때문에 initalPreview로 프로퍼티 전달해서 그냥씀
                 onCancel={setEditingId}
+                initialValues={initialValues}
+                initialPreview={imgUrl}
                 onSubmit={handleSubmit}
-                handleSubmitSuccess={handleEditSuccess}
+                onSubmitSuccess={handleSubmitSuccess}
               />
             </li>
           );
