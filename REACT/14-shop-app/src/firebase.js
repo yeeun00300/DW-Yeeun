@@ -86,3 +86,11 @@ export async function getDatas(collectionName, queryOptions) {
   const resultData = docs.map((doc) => ({ ...doc.data(), docId: doc.id }));
   return resultData;
 }
+
+export async function getData(collectionName, queryOptions) {
+  const q = getQuery(collectionName, queryOptions);
+  const snapshot = await getDocs(q);
+  const doc = snapshot.docs[0];
+  const resultData = { ...doc.data(), docId: doc.id };
+  return resultData;
+}
