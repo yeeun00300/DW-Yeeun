@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
-import { fetchProduct } from "../../store/products/productSlice";
-import styles from "./DetailPage.module.scss";
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useParams } from 'react-router-dom';
+import { fetchProduct } from '../../store/products/productSlice';
+import styles from './DetailPage.module.scss';
 
 function DetailPage() {
   const { id } = useParams();
@@ -12,15 +12,15 @@ function DetailPage() {
 
   useEffect(() => {
     const queryOptions = {
-      conditions: [{ field: "id", operator: "==", value: productId }],
+      conditions: [{ field: 'id', operator: '==', value: productId }],
     };
-    dispatch(fetchProduct({ collectionName: "products", queryOptions }));
+    dispatch(fetchProduct({ collectionName: 'products', queryOptions }));
   }, []);
 
   return (
-    <div className="page">
+    <div className='page'>
       {isLoading ? (
-        "Loading..."
+        'Loading...'
       ) : (
         <div className={styles.card_wrapper}>
           <div className={styles.card_img}>
@@ -29,7 +29,7 @@ function DetailPage() {
           <div className={styles.card_description}>
             <h3>{product.category}</h3>
             <h1>{product.title}</h1>
-            <h4>$ {product.price}</h4>
+            <h4>{product.price}</h4>
             <p>{product.description}</p>
             <div>
               <button>장바구니에 담기</button>

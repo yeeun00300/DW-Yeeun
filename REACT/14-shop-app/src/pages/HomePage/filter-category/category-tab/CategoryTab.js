@@ -1,11 +1,11 @@
-import React from "react";
-import styles from "./CategoryTab.module.scss";
-import { useDispatch, useSelector } from "react-redux";
-import { setActiveCategory } from "../../../../store/categories/categoriesSlice";
+import React from 'react';
+import styles from './CategoryTab.module.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { setActiveCategory } from '../../../../store/categories/categoriesSlice';
 
 function CategoryTab({ text, categoryName }) {
-  const category = useSelector((state) => state.categoriesSlice);
   const dispatch = useDispatch();
+  const category = useSelector((state) => state.categoriesSlice);
   return (
     <button
       className={

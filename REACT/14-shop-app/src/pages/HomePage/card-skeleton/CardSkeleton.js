@@ -1,9 +1,9 @@
-import React from "react";
-import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
-import styles from "./CardSkeleton.module.scss";
+import React from 'react';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
+import styles from './CardSkeleton.module.scss';
 
-function CardSkeleton(props) {
+function CardSkeleton() {
   return (
     <div className={styles.card_skeleton_container}>
       <div className={styles.card_skeleton}>

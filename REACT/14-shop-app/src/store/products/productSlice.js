@@ -1,14 +1,14 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getData, getDatas } from "../../firebase";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { getData } from '../../firebase';
 
 const initialState = {
   product: {},
   isLoading: false,
-  error: "",
+  error: '',
 };
 
 const productSlice = createSlice({
-  name: "product",
+  name: 'product',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -21,14 +21,14 @@ const productSlice = createSlice({
         state.product = action.payload;
       })
       .addCase(fetchProduct.rejected, (state, action) => {
-        state.isLoading = true;
+        state.isLoading = false;
         state.error = action.payload;
       });
   },
 });
 
 const fetchProduct = createAsyncThunk(
-  "product/fetchProducts",
+  'product/fetchProduct',
   async ({ collectionName, queryOptions }) => {
     try {
       const resultData = await getData(collectionName, queryOptions);
