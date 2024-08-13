@@ -34,9 +34,12 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 function getCollection(...path) {
-  console.log(...path);
-  console.log(path);
-  return collection(db, ...path);
+  let newPath = path;
+  if (typeof path[0] !== "string") {
+    // [newPath] = path;
+    newPath = path.flat();
+  }
+  return collection(db, ...newPath);
 }
 
 export function getUserAuth() {
@@ -101,13 +104,13 @@ export async function asyncCart(uid, cartArr) {
   const cartRef = getCollection("users", uid, "cart");
   const batch = writeBatch(db);
 
-  cartArr.forEach((item) => {
-    const result = updateQuantity(uid, item);
+  for (const item of cartArr) {
+    const result = await updateQuantity(uid, item);
     if (!result) {
       const itemRef = doc(cartRef, item.id.toString());
       batch.set(itemRef, item);
     }
-  });
+  }
 
   await batch.commit();
 }
@@ -115,7 +118,6 @@ export async function asyncCart(uid, cartArr) {
 export async function updateQuantity(uid, cartItem) {
   const cartRef = getCollection("users", uid, "cart");
   const itemRef = doc(cartRef, cartItem.id.toString());
-
   // 문서가 존재하는지 확인
   const itemDoc = await getDoc(itemRef);
   if (itemDoc.exists()) {
@@ -126,4 +128,23 @@ export async function updateQuantity(uid, cartItem) {
   } else {
     return false;
   }
+}
+
+export async function deleteDatas(collectionName, docId) {
+  try {
+    const cartRef = getCollection(collectionName);
+    console.log(cartRef);
+    const docRef = doc(cartRef, docId.toString());
+    console.log(docRef);
+    await deleteDoc(docRef);
+    return true;
+  } catch (error) {
+    console.log("Error Delete: ", error);
+  }
+}
+
+export async function addCart(collectionName, cartObj) {
+  const collectionRef = getCollection(collectionName);
+  const cartRef = doc(collectionRef, cartObj.id.toString());
+  await setDoc(cartRef, cartObj);
 }

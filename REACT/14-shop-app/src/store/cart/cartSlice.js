@@ -1,4 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { addCart, deleteDatas } from '../../firebase';
 
 const initialState = {
   products: localStorage.getItem('cartProducts')
@@ -18,6 +19,12 @@ const cartSlice = createSlice({
         quantity: 1,
         total: action.payload.price,
       });
+      localStorage.setItem('cartProducts', JSON.stringify(state.products));
+    },
+    deleteFromCart: (state, action) => {
+      state.products = state.products.filter(
+        (product) => product.id !== action.payload
+      );
       localStorage.setItem('cartProducts', JSON.stringify(state.products));
     },
     getTotalPrice: (state) => {
@@ -43,6 +50,43 @@ const cartSlice = createSlice({
   },
 });
 
+export const addCartItem = createAsyncThunk(
+  'cart/addCartItem',
+  async ({ collectionName, product }, thunkAPI) => {
+    try {
+      await thunkAPI.dispatch(addToCart(product));
+      // const products = thunkAPI.getState().cartSlice.products;
+      const {
+        cartSlice: { products },
+      } = thunkAPI.getState();
+      const addItem = products.find(
+        (sliceProduct) => sliceProduct.id === product.id
+      );
+      await addCart(collectionName, addItem);
+    } catch (error) {}
+  }
+);
+
+export const deleteCartItem = createAsyncThunk(
+  'cart/deleteCartItem',
+  async ({ collectionName, productId }, thunkAPI) => {
+    console.log(productId);
+    try {
+      const resultData = await deleteDatas(collectionName, productId);
+      if (resultData) {
+        thunkAPI.dispatch(deleteFromCart(productId));
+      }
+    } catch (error) {
+      return thunkAPI.rejectWithValue('Error Delete CartItem');
+    }
+  }
+);
+
 export default cartSlice.reducer;
-export const { addToCart, getTotalPrice, incrementProduct, decrementProduct } =
-  cartSlice.actions;
+export const {
+  addToCart,
+  deleteFromCart,
+  getTotalPrice,
+  incrementProduct,
+  decrementProduct,
+} = cartSlice.actions;
