@@ -1,15 +1,15 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  products: localStorage.getItem("cartProducts")
-    ? JSON.parse(localStorage.getItem("cartProducts"))
+  products: localStorage.getItem('cartProducts')
+    ? JSON.parse(localStorage.getItem('cartProducts'))
     : [],
   totalPrice: 0,
-  userId: "",
+  userId: '',
 };
 
 const cartSlice = createSlice({
-  name: "cart",
+  name: 'cart',
   initialState,
   reducers: {
     addToCart: (state, action) => {
@@ -18,7 +18,7 @@ const cartSlice = createSlice({
         quantity: 1,
         total: action.payload.price,
       });
-      localStorage.setItem("cartProducts", JSON.stringify(state.products));
+      localStorage.setItem('cartProducts', JSON.stringify(state.products));
     },
     getTotalPrice: (state) => {
       state.totalPrice = state.products.reduce(
@@ -33,8 +33,16 @@ const cartSlice = createSlice({
       state.products[index].quantity += 1;
       state.products[index].total += state.products[index].price;
     },
+    decrementProduct: (state, action) => {
+      const index = state.products.findIndex(
+        (product) => product.id === action.payload
+      );
+      state.products[index].quantity -= 1;
+      state.products[index].total -= state.products[index].price;
+    },
   },
 });
 
 export default cartSlice.reducer;
-export const { addToCart, getTotalPrice, incrementProduct } = cartSlice.actions;
+export const { addToCart, getTotalPrice, incrementProduct, decrementProduct } =
+  cartSlice.actions;

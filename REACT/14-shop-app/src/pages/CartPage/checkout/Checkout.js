@@ -1,12 +1,13 @@
-import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
-import styles from "./Checkout.module.scss";
-import { useDispatch, useSelector } from "react-redux";
-import { getTotalPrice } from "../../../store/cart/cartSlice";
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import styles from './Checkout.module.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { getTotalPrice } from '../../../store/cart/cartSlice';
 
 function Checkout() {
   const { totalPrice } = useSelector((state) => state.cartSlice);
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getTotalPrice());
   }, []);

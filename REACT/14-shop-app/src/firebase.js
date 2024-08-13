@@ -15,6 +15,8 @@ import {
   updateDoc,
   doc,
   deleteDoc,
+  setDoc,
+  writeBatch,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -31,8 +33,10 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-function getCollection(collectionName) {
-  return collection(db, collectionName);
+function getCollection(...path) {
+  console.log(...path);
+  console.log(path);
+  return collection(db, ...path);
 }
 
 export function getUserAuth() {
@@ -87,4 +91,39 @@ export async function getData(collectionName, queryOptions) {
   const doc = snapshot.docs[0];
   const resultData = { ...doc.data(), docId: doc.id };
   return resultData;
+}
+
+export async function joinUser(uid, email) {
+  await setDoc(doc(db, "users", uid), { email: email });
+}
+
+export async function asyncCart(uid, cartArr) {
+  const cartRef = getCollection("users", uid, "cart");
+  const batch = writeBatch(db);
+
+  cartArr.forEach((item) => {
+    const result = updateQuantity(uid, item);
+    if (!result) {
+      const itemRef = doc(cartRef, item.id.toString());
+      batch.set(itemRef, item);
+    }
+  });
+
+  await batch.commit();
+}
+
+export async function updateQuantity(uid, cartItem) {
+  const cartRef = getCollection("users", uid, "cart");
+  const itemRef = doc(cartRef, cartItem.id.toString());
+
+  // 문서가 존재하는지 확인
+  const itemDoc = await getDoc(itemRef);
+  if (itemDoc.exists()) {
+    const currentData = itemDoc.data();
+    const updatedQuantity = (currentData.quantity || 0) + 1;
+    await updateDoc(itemRef, { quantity: updatedQuantity });
+    return true;
+  } else {
+    return false;
+  }
 }
