@@ -1,6 +1,6 @@
-import React from "react";
-import styles from "./OrderItem.module.scss";
-import { Link } from "react-router-dom";
+import React from 'react';
+import styles from './OrderItem.module.scss';
+import { Link } from 'react-router-dom';
 
 function OrderItem({ image, category, title, price, quantity, total, id }) {
   return (

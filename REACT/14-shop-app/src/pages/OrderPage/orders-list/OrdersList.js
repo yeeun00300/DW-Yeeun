@@ -19,7 +19,7 @@ function OrdersList() {
         queryOptions: {},
       })
     );
-  }, []);
+  }, [uid]);
 
   if (order.length == 0) {
     return <CartEmpty title='주문 내역' />;
