@@ -1,23 +1,23 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
   addCart,
   syncCart,
   deleteDatas,
   updateTotalAndQuantity,
   createOrder,
-} from '../../firebase';
-import { addDatasRest, deleteDatasRest, deleteDatasRestBatch } from '../../api';
+} from "../../firebase";
+import { addDatasRest, deleteDatasRest, deleteDatasRestBatch } from "../../api";
 
 const initialState = {
-  products: localStorage.getItem('cartProducts')
-    ? JSON.parse(localStorage.getItem('cartProducts'))
+  products: localStorage.getItem("cartProducts")
+    ? JSON.parse(localStorage.getItem("cartProducts"))
     : [],
   totalPrice: 0,
-  userId: '',
+  userId: "",
 };
 
 const cartSlice = createSlice({
-  name: 'cart',
+  name: "cart",
   initialState,
   reducers: {
     addToCart: (state, action) => {
@@ -26,17 +26,17 @@ const cartSlice = createSlice({
         quantity: 1,
         total: action.payload.price,
       });
-      localStorage.setItem('cartProducts', JSON.stringify(state.products));
+      localStorage.setItem("cartProducts", JSON.stringify(state.products));
     },
     deleteFromCart: (state, action) => {
       state.products = state.products.filter(
         (product) => product.id !== action.payload
       );
-      localStorage.setItem('cartProducts', JSON.stringify(state.products));
+      localStorage.setItem("cartProducts", JSON.stringify(state.products));
     },
     syncCartAndSlice: (state, action) => {
       state.products = action.payload;
-      localStorage.setItem('cartProducts', JSON.stringify(state.products));
+      localStorage.setItem("cartProducts", JSON.stringify(state.products));
     },
     getTotalPrice: (state) => {
       state.totalPrice = state.products.reduce(
@@ -50,7 +50,7 @@ const cartSlice = createSlice({
       );
       state.products[index].quantity += 1;
       state.products[index].total += state.products[index].price;
-      localStorage.setItem('cartProducts', JSON.stringify(state.products));
+      localStorage.setItem("cartProducts", JSON.stringify(state.products));
     },
     decrementProduct: (state, action) => {
       const index = state.products.findIndex(
@@ -58,17 +58,17 @@ const cartSlice = createSlice({
       );
       state.products[index].quantity -= 1;
       state.products[index].total -= state.products[index].price;
-      localStorage.setItem('cartProducts', JSON.stringify(state.products));
+      localStorage.setItem("cartProducts", JSON.stringify(state.products));
     },
     sendOrder: (state) => {
       state.products = [];
-      localStorage.setItem('cartProducts', JSON.stringify(state.products));
+      localStorage.setItem("cartProducts", JSON.stringify(state.products));
     },
   },
 });
 
 export const syncCartAndStorage = createAsyncThunk(
-  'cart/asyncCartItem',
+  "cart/asyncCartItem",
   async ({ uid, cartItems }, thunkAPI) => {
     try {
       const result = await syncCart(uid, cartItems);
@@ -80,7 +80,7 @@ export const syncCartAndStorage = createAsyncThunk(
 );
 
 export const addCartItem = createAsyncThunk(
-  'cart/addCartItem',
+  "cart/addCartItem",
   async ({ collectionName, product }, thunkAPI) => {
     try {
       await thunkAPI.dispatch(addToCart(product));
@@ -98,7 +98,7 @@ export const addCartItem = createAsyncThunk(
 );
 
 export const deleteCartItem = createAsyncThunk(
-  'cart/deleteCartItem',
+  "cart/deleteCartItem",
   async ({ collectionName, productId }, thunkAPI) => {
     try {
       // const resultData = await deleteDatas(collectionName, productId);
@@ -107,17 +107,17 @@ export const deleteCartItem = createAsyncThunk(
         thunkAPI.dispatch(deleteFromCart(productId));
       }
     } catch (error) {
-      return thunkAPI.rejectWithValue('Error Delete CartItem');
+      return thunkAPI.rejectWithValue("Error Delete CartItem");
     }
   }
 );
 
 export const calculateTotalAndQuantity = createAsyncThunk(
-  'cart/cartItemCalculate',
+  "cart/cartItemCalculate",
   async ({ uid, productId, operator }, thunkAPI) => {
     try {
       await updateTotalAndQuantity(uid, productId, operator);
-      if (operator === 'increment') {
+      if (operator === "increment") {
         thunkAPI.dispatch(incrementProduct(productId));
       } else {
         thunkAPI.dispatch(decrementProduct(productId));
@@ -129,13 +129,13 @@ export const calculateTotalAndQuantity = createAsyncThunk(
 );
 
 export const postOrder = createAsyncThunk(
-  'cart/createOrder',
+  "cart/createOrder",
   async ({ uid, cart }, thunkAPI) => {
     try {
       // createOrder 함수 호출
       // const result = await createOrder(uid, cart);
       const orderObj = {
-        cancelYn: 'N',
+        cancelYn: "N",
         createdAt: new Date().getTime(),
         updatedAt: new Date().getTime(),
         ...cart,
@@ -147,7 +147,7 @@ export const postOrder = createAsyncThunk(
       );
 
       const deleteResult = await deleteDatasRestBatch(
-        `users/${uid}/cart`,
+        `/users/${uid}/cart/`,
         cart.products
       );
 
