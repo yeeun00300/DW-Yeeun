@@ -7,7 +7,6 @@ function App() {
   const uData = [40, 30, 20, 27, 18, 23, 34];
   const pData = [24, 13, 30, 39, 48, 38, 43];
   const xLabels = ["8/1", "8/2", "8/3", "8/4", "8/5", "8/6", "8/7"];
-
   return (
     <div className="App">
       <LineChart
