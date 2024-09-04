@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
-import styles from './CardList.module.scss';
-import CardItem from './card-item/CardItem';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchProducts } from '../../../store/products/productsSlice';
-import CardSkeleton from '../card-skeleton/CardSkeleton';
-import { getDatasRest } from '../../../api';
+import React, { useEffect } from "react";
+import styles from "./CardList.module.scss";
+import CardItem from "./card-item/CardItem";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProducts } from "../../../store/products/productsSlice";
+import CardSkeleton from "../card-skeleton/CardSkeleton";
+import { getDatasRest } from "../../../api";
 
 function CardList() {
   const dispatch = useDispatch();
@@ -14,26 +14,26 @@ function CardList() {
     const queryOptions = {
       conditions: [
         {
-          field: 'category',
-          operator: category ? 'EQUAL' : 'GREATER_THAN_OR_EQUAL',
+          field: "category",
+          operator: category ? "EQUAL" : "GREATER_THAN_OR_EQUAL",
           value: category.toLowerCase(),
         },
       ],
     };
-    const restResult = await getDatasRest('products', queryOptions);
+    const restResult = await getDatasRest("products", queryOptions);
   };
   useEffect(() => {
     const queryOptions = {
       conditions: [
         {
-          field: 'category',
+          field: "category",
           // operator: category ? '==' : '>=',
-          operator: category ? 'EQUAL' : 'GREATER_THAN_OR_EQUAL',
+          operator: category ? "EQUAL" : "GREATER_THAN_OR_EQUAL",
           value: category.toLowerCase(),
         },
       ],
     };
-    dispatch(fetchProducts({ collectionName: 'products', queryOptions }));
+    dispatch(fetchProducts({ collectionName: "products", queryOptions }));
     // handleLoad();
   }, [category]);
 
